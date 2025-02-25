@@ -1,0 +1,117 @@
+ 
+#wrapper {
+    width: 100%;
+    height: 750px;
+    max-height: 800px;
+    position: relative;
+    background: rgb(245, 226, 159);
+    background: linear-gradient(90deg, rgba(245, 226, 159, 1) 0%, rgba(249, 240, 220, 1) 46%, rgba(248, 238, 209, 1) 59%, rgba(245, 226, 159, 1) 100%);
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.parallax {
+    position: absolute;
+}
+
+#warpbg {
+    top: -200px;
+    left: -350px;
+    max-height: 1600px;
+}
+
+#star1 {
+    width: 550px;
+    height: 300px;
+    position: relative;
+    margin: auto; 
+    top: 30%;
+}
+
+#star2 {
+    top: 220px;
+    right: 500px;
+    width: 120px;
+    height: 120px;
+}
+
+#star3 {
+    bottom: 20px;
+    right: 20px;
+    width: 220px;
+    height: 220px;
+}
+
+#star4 {
+    top: 80px;
+    left: 290px;
+    width: 220px;
+    height: 220px;
+}
+
+#star5 {
+    bottom: 100px;
+    left: 200px;
+    width: 220px;
+    height: 220px;
+}
+
+#planet {
+    top: 450px;
+    left: 200px;
+    width: 220px;
+    height: 220px;
+}
+
+#robot {
+    top: 300px;
+    right: 100px;
+    width: 220px;
+    height: 220px;
+}
+
+#astronaut {
+    bottom: 58px;
+    right: 50px;
+    width: 220px;
+    height: 220px;
+}
+
+#astronaut1 {
+    bottom: 58px;
+    right: 300px;
+    width: 220px;
+    height: 220px;
+}#astronaut2 {
+    top: 58px;
+    right: 300px;
+    width: 220px;
+    height: 220px;
+} 
+
+#asteroid {
+    bottom: 10px;
+    right: 10px;
+    width: 220px;
+    height: 220px;
+}
+
+#readmebutton {
+    position: relative;
+    left: 40%;
+}
+
+#titlesection {
+    box-shadow: 0 4px 8px 0 rgba(255, 217, 1, 0.986);
+    transition: 0.3s;
+    min-width: 40%;
+    border-radius: 5px;
+}
+#star12 {
+    width: 100%;
+    height: 180px; 
+    margin: 0px auto;
+    position: absolute;
+    bottom: 0px;
+}
+ 
