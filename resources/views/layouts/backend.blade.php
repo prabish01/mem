@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
   <meta charset="UTF-8">
   <title>MEM Admin Dashboard</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>

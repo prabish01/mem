@@ -26,9 +26,7 @@
                                 <i class="fa fa-phone-alt"></i>
                             </div>
                             <div class="call-right">
-                                <div>
-                                    Sales Support
-                                </div>
+                                <div>Sales Support</div>
                                 <div class="top-number">
                                     <a href="tel:97715184300">+977-1-5184300</a>
                                 </div>
@@ -46,8 +44,7 @@
                                 aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-user" style="size: 30px;"></i>
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
-                                style="background-color: white">
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 @php
                                 $currentuser = Auth::user();
                                 @endphp
@@ -67,8 +64,7 @@
                                             <span class="top-login-link">{{ __('Logout') }}</span>
                                         </a>
                             </div>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                style="display: none;">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
                             @endguest
@@ -88,24 +84,21 @@
                 </div>
             </div>
         </div>
-        <div class="menu-bar" id="desktopMenuBar">
-            <nav class="navbar navbar-expand-lg">
-                <div class="container">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <i class="fa fa-bars"></i>
+        <div class="bg-[#eab22c] shadow-md" id="desktopMenuBar">
+            <nav class="relative">
+                <div class="container mx-auto px-4">
+                    <button class="lg:hidden flex items-center px-3 py-2 text-black" type="button" data-toggle="navbar" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars text-xl"></i>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                        <ul class="navbar-nav mx-auto">
-
+                    <div class="hidden lg:flex lg:items-center" id="navbarCollapse">
+                        <ul class="flex flex-col lg:flex-row lg:mx-auto lg:space-x-1">
                             @php
                             $cats = DB::table('categories')
                             ->select('id', 'category_name')
                             ->get();
                             @endphp
                             @foreach ($cats as $cat)
-                            <li class="nav-item dropdown">
+                            <li class="group relative">
                                 @php
                                 $subcats = DB::table('sub_categories')
                                 ->select('id', 'category_id', 'subcategory_name')
@@ -115,13 +108,16 @@
                                 @endphp
                                 @php $i= 0; @endphp
                                 @if ($subcats->count() > 0)
-                                <a class="nav-link" href="#">{{ $cat->category_name }}</a>
+                                <a class="block py-4 px-6 text-black uppercase text-sm font-medium relative hover:bg-black hover:text-white transition-all duration-200 transform skew-x-12" href="#">
+                                    <span class="inline-block transform -skew-x-12">{{ $cat->category_name }}</span>
+                                </a>
                                 @else
-                                <a class="nav-link" href="#">{{ $cat->category_name }}</a>
+                                <a class="block py-4 px-6 text-black uppercase text-sm font-medium relative hover:bg-black hover:text-white transition-all duration-200 transform skew-x-12" href="#">
+                                    <span class="inline-block transform -skew-x-12">{{ $cat->category_name }}</span>
+                                </a>
                                 @endif
-                                <ul class="dropdown-menu">
+                                <ul class="hidden group-hover:block absolute left-0 mt-0 w-56 bg-black border border-gray-800 rounded-b-md shadow-lg z-50">
                                     @foreach ($subcats as $subcat)
-
                                     @php
                                     $childcats = DB::table('child_categories')
                                     ->select('id', 'childcategory_name')
@@ -130,39 +126,43 @@
                                     ->get();
                                     @endphp
                                     @if ($childcats->count() > 0)
-                                    <li class="dropdown-submenu"><a class="dropdown-item"
-                                            href="{{ URL::to('/product/subcategory', $subcat->id) }}">{{ $subcat->subcategory_name }}</a>
-
-                                        <ul class="dropdown-menu">
+                                    <li class="group/sub relative">
+                                        <a class="block px-4 py-2 text-sm text-white hover:bg-gray-700 flex justify-between items-center" href="{{ URL::to('/product/subcategory', $subcat->id) }}">
+                                            {{ $subcat->subcategory_name }}
+                                            <i class="fas fa-chevron-right text-xs ml-2"></i>
+                                        </a>
+                                        <ul class="hidden group-hover/sub:block absolute left-full top-0 w-56 bg-black border border-gray-800 rounded-r-md shadow-lg">
                                             @foreach ($childcats as $childcat)
-                                            <li class="dropdown">
-                                                <a class="dropdown-item"
-                                                    href="{{ URL::to('/product/childcategory', $childcat->id) }}">{{ $childcat->childcategory_name }}</a>
+                                            <li>
+                                                <a class="block px-4 py-2 text-sm text-white hover:bg-gray-700" href="{{ URL::to('/product/childcategory', $childcat->id) }}">
+                                                    {{ $childcat->childcategory_name }}
+                                                </a>
                                             </li>
-
                                             @endforeach
                                         </ul>
-                                        @else
-                                    <li class="dropdown-submenu"><a class="dropdown-item"
-                                            href="{{ URL::to('/product/subcategory', $subcat->id) }}">{{ $subcat->subcategory_name }}</a>
-
-                                        @endif
                                     </li>
+                                    @else
+                                    <li>
+                                        <a class="block px-4 py-2 text-sm text-white hover:bg-gray-700" href="{{ URL::to('/product/subcategory', $subcat->id) }}">
+                                            {{ $subcat->subcategory_name }}
+                                        </a>
+                                    </li>
+                                    @endif
                                     @endforeach
                                 </ul>
                             </li>
-                            </li>
                             @endforeach
-                            <li class="nav-item dropdown">
-                                <a href="" class="nav-link">Company</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ url('frontend/about/us') }}">About Us</a>
-                                    <a class="dropdown-item" href="{{ route('services') }}">My Care</a>
-                                    <a class="dropdown-item" href="{{ route('career') }}">Career</a>
-                                    <a class="dropdown-item" href="{{ url('frontend/contact/us') }}">Contact Us</a>
+                            <li class="group relative">
+                                <a href="" class="block py-4 px-6 text-black uppercase text-sm font-medium relative hover:bg-black hover:text-white transition-all duration-200 transform skew-x-12">
+                                    <span class="inline-block transform -skew-x-12">Company</span>
+                                </a>
+                                <div class="hidden group-hover:block absolute right-0 mt-0 w-56 bg-black border border-gray-800 rounded-b-md shadow-lg">
+                                    <a class="block px-4 py-2 text-sm text-white hover:bg-gray-700" href="{{ url('frontend/about/us') }}">About Us</a>
+                                    <a class="block px-4 py-2 text-sm text-white hover:bg-gray-700" href="{{ route('services') }}">My Care</a>
+                                    <a class="block px-4 py-2 text-sm text-white hover:bg-gray-700" href="{{ route('career') }}">Career</a>
+                                    <a class="block px-4 py-2 text-sm text-white hover:bg-gray-700" href="{{ url('frontend/contact/us') }}">Contact Us</a>
                                 </div>
                             </li>
-
                         </ul>
                     </div>
                 </div>

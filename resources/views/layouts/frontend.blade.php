@@ -2,7 +2,6 @@
 <html class="no-js" lang="en">
 
 <head>
-    <script src="https://cdn.tailwindcss.com"></script>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Manokamana Earthmovers</title>
@@ -10,7 +9,6 @@
 
     <!-- Load Tailwind CSS first -->
     <!-- @vite('resources/css/app.css') -->
-
 
     <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -33,18 +31,31 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <!-- Load Tailwind CSS last -->
+
     <title>Manokamana Earthmovers</title>
     <script src="https://khalti.com/static/khalti-checkout.js"></script>
-
 
     <!-- parallel js styling -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets\js\parallaxjs\css\categorystyle.css') }}" />
     <style>
-        /*.dropdown-menu {*/
-        /*    max-height: 580px;*/
-        /*    overflow-y: auto;*/
-        /*}*/
+        /* Override Tailwind's preflight styles */
+        .navbar-nav {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
 
+        .navbar-nav li {
+            margin: 0;
+        }
+
+        .navbar-nav a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Preserve Bootstrap's dropdown functionality */
         .navbar-nav li:hover>ul.dropdown-menu {
             display: block;
         }
@@ -68,7 +79,38 @@
         .card {
             box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.26);
         }
+
+        /* Ensure Bootstrap's navbar styles take precedence */
+        .navbar {
+            display: flex !important;
+        }
+
+        .navbar-collapse {
+            display: flex !important;
+        }
+
+        .navbar-nav {
+            display: flex !important;
+        }
+
+        .nav-link {
+            display: block !important;
+            padding: 0.5rem 1rem !important;
+        }
+
+        .dropdown-menu {
+            position: absolute !important;
+            display: none;
+            min-width: 10rem;
+            padding: 0.5rem 0;
+            margin: 0;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, .15);
+            border-radius: 0.25rem;
+        }
     </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 
 <body>

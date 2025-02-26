@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 
 <head>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Manokamana Earthmovers</title>
