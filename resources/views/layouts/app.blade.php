@@ -100,6 +100,7 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                                 <ul class="navbar-nav mx-auto">
+                                    
                                     @php
                                     $cats = DB::table('categories')->select('id','category_name')->get();
                                     @endphp

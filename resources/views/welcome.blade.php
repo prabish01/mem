@@ -1,7 +1,6 @@
 @extends('layouts.frontend')
 @section('content')
 <div class="content-body">
-    <h1 class="text-2xl text-red-500">hello</h1>
     <section id="homeSliderSection">
         <div class="container">
             <div class="row">
