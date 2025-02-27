@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const imageminMozjpeg = require("imagemin-mozjpeg");
 const imageminPngquant = require("imagemin-pngquant");
 const imageminWebp = require("imagemin-webp");
-const purgecss = require('@fullhuman/postcss-purgecss');
+const purgecss = require("@fullhuman/postcss-purgecss");
 
 mix.js("resources/js/app.js", "public/js")
     .sass("resources/sass/app.scss", "public/css")
@@ -25,18 +25,19 @@ mix.js("resources/js/app.js", "public/js")
         postCss: [
             purgecss({
                 content: [
-                    './resources/views/**/*.blade.php',
-                    './resources/js/**/*.js',
-                    './resources/js/**/*.vue',
+                    "./resources/views/**/*.blade.php",
+                    "./resources/js/**/*.js",
+                    "./resources/js/**/*.vue",
                 ],
-                defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
+                defaultExtractor: (content) =>
+                    content.match(/[\w-/:]+(?<!:)/g) || [],
                 safelist: {
                     standard: [/^owl-/, /^swiper-/, /^pagination-/],
                     deep: [/^owl-/, /^swiper-/, /^pagination-/],
-                    greedy: [/^owl-/, /^swiper-/, /^pagination-/]
-                }
-            })
-        ]
+                    greedy: [/^owl-/, /^swiper-/, /^pagination-/],
+                },
+            }),
+        ],
     })
     .minify(["public/css/app.css"])
     .minify(["public/js/app.js"])
@@ -70,4 +71,8 @@ mix.js("resources/js/app.js", "public/js")
             usedExports: true,
             sideEffects: true,
         },
-    });
+    })
+    .copy(
+        "resources/assets/js/parallaxjs/js/categorystyle.js",
+        "public/assets/js/parallaxjs/js"
+    );

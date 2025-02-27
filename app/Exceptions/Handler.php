@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -47,5 +48,14 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    public function register()
+    {
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            if ($request->is('assets/*')) {
+                return response()->json(['error' => 'Asset not found'], 404);
+            }
+        });
     }
 }

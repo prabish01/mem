@@ -45,7 +45,16 @@
     <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.22.0.0.0/khalti-checkout.iffe.js"></script>
 
     <!-- parallel js styling -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets\js\parallaxjs\css\categorystyle.css') }}" />
+    <link href="{{ asset('assets/js/parallaxjs/css/categorystyle.css') }}?v={{ filemtime(public_path('assets/js/parallaxjs/css/categorystyle.css')) }}" rel="stylesheet">
+    @php
+    $jsPath = public_path('assets/js/parallaxjs/js/categorystyle.js');
+    $jsHash = hash_file('sha384', $jsPath);
+    @endphp
+
+    <script src="{{ asset('assets/js/parallaxjs/js/categorystyle.js') }}"
+        integrity="sha384-{{ base64_encode(hex2bin($jsHash)) }}"
+        crossorigin="anonymous"
+        defer></script>
     <style>
         /* Override Tailwind's preflight styles */
         .navbar-nav {
@@ -278,7 +287,7 @@
 
         <!-- parallel js -->
         <script type="text/javascript" src="{{ asset('assets/js/parallaxjs/jquery.parallaxmouse.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('assets\js\parallaxjs\js\categorystyle.js') }}"></script>
+        <script src="{{ asset('assets/js/parallaxjs/js/categorystyle.js') }}"></script>
     </div>
 
     <!-- Add tooltips for better UX -->
@@ -333,6 +342,22 @@
             transition: transform 0.3s ease-in-out;
         }
     </style>
+
+    <img src="{{ asset('assets/img/logomem.png') }}"
+        alt="Company Main Logo"
+        class="main-logo">
+
+    <img src="{{ asset('assets/img/facebook.png') }}"
+        alt="Connect with us on Facebook"
+        class="social-icon">
+
+    <img src="{{ asset('assets/img/instagram.png') }}"
+        alt="Follow us on Instagram"
+        class="social-icon">
+
+    <img src="{{ asset('assets/img/ankurlogo.png') }}"
+        alt="Ankur Auto Parts Logo"
+        class="brand-logo">
 </body>
 
 </html>

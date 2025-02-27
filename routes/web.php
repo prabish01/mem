@@ -152,3 +152,16 @@ Route::get('/career', 'HomeController@career')->name('career');
 Route::post('/vacancy', 'HomeController@vacancy')->name('vacancy');
 
 Route::get('frontcatalogues/pdf/{id}', 'Frontend\FrontCatalogueController@pdfdownload')->name('cataloguespdf');
+
+Route::get('assets/js/parallaxjs/js/categorystyle.js', function () {
+	$file = public_path('assets/js/parallaxjs/js/categorystyle.js');
+
+	if (!file_exists($file)) {
+		abort(404);
+	}
+
+	return response()->file($file, [
+		'Content-Type' => 'application/javascript',
+		'Cache-Control' => 'public, max-age=31536000'
+	]);
+});
