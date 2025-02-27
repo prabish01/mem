@@ -53,4 +53,16 @@ class ProductController extends Controller
             'current_childcat_id' => $childcategory->id
         ]);
     }
+
+    public function childCategory($id)
+    {
+        $childcategory = ChildCategory::findOrFail($id);
+        return view('frontend.product.childcategory', compact('childcategory'));
+    }
+
+    public function subCategory($id)
+    {
+        $subcategory = SubCategory::findOrFail($id);
+        return view('frontend.product.subcategory', compact('subcategory'));
+    }
 }
