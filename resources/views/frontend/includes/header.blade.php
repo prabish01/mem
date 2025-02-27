@@ -6,16 +6,17 @@
                 <div class="row">
                     <div class="col-md-3 my-auto">
                         <a href="{{ route('landing') }}" class="navbar-brand">
-                            <img class="site-logo" src="{{ asset('assets/img/logomem.png') }}">
+                            <img class="site-logo" src="{{ asset('assets/img/logomem.png') }}" alt="Manokamana Earthmovers - Leading Construction Equipment Supplier in Nepal">
                         </a>
                     </div>
                     <div class="col-md-5 my-auto">
                         <div class="text-center">
-                            <form id="topSearch" action="{{ url('search/product') }}" method="post">
+                            <form id="topSearch" action="{{ url('search/product') }}" method="post" role="search" aria-label="Desktop product search">
                                 {{ csrf_field() }}
-                                <input type="text" name="search_text" placeholder="Search Product">
-                                <button type="submit">
-                                    <i class="fa fa-search"></i>
+                                <input type="text" name="search_text" placeholder="Search Product" aria-label="Search for products">
+                                <button type="submit" aria-label="Submit search">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                    <span class="sr-only">Search</span>
                                 </button>
                             </form>
                         </div>
@@ -173,7 +174,7 @@
     <div id="mobileMenu">
         <div class="hs-menubar">
             <div class="brand-logo">
-                <a href="{{ route('landing') }}"><img src="{{ asset('assets/img/logomem.png') }}" alt="MEM logo"> </a>
+                <a href="{{ route('landing') }}"><img src="{{ asset('assets/img/logomem.png') }}" alt="Manokamana Earthmovers - Construction Equipment Supplier"> </a>
             </div>
 
             <div class="menu-trigger"> <i class="fa fa-bars"></i></div>
@@ -233,9 +234,6 @@
                     <button type="submit" class="mob-search-btn">
                         <i class="fa fa-search"></i>
                     </button>
-
-
-
                 </div>
             </form>
         </div>

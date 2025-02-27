@@ -1,4 +1,25 @@
 @extends('layouts.frontend')
+
+@section('title')
+Manokamana Earthmovers - Premium Construction Equipment & Parts in Nepal
+@endsection
+
+@section('meta_description')
+Discover premium construction equipment, earthmoving machinery, and industrial parts at Manokamana Earthmovers. We offer high-quality products with excellent service and nationwide delivery across Nepal.
+@endsection
+
+@section('meta_keywords')
+construction equipment Nepal, earthmoving machinery, industrial parts, construction supplies, Manokamana Earthmovers, heavy equipment dealer
+@endsection
+
+@section('og_title')
+Manokamana Earthmovers - Your Trusted Partner in Construction Equipment
+@endsection
+
+@section('og_description')
+Leading supplier of premium construction equipment, parts, and machinery in Nepal. Explore our wide range of products with excellent after-sales support.
+@endsection
+
 @section('content')
 <div class="content-body">
     <section id="homeSliderSection">
@@ -9,7 +30,7 @@
                         @php $i= 0; @endphp
                         @foreach($sliders as $slider)
                         <div class="item {{ $i == 0 ? 'active' : '' }}">
-                            <img src="{{asset('uploads/slider'.'/'.$slider->image)}}">
+                            <img src="{{asset('uploads/slider'.'/'.$slider->image)}}" alt="Manokamana Earthmovers - Construction Equipment Slider Image {{$i + 1}}">
                         </div>
                         @php $i++; @endphp
                         @endforeach
@@ -20,21 +41,21 @@
     </section>
     <div id="wrapper">
         {{-- <img id="warpbg" class="parallax left top" src="{{ asset('assets/js/parallaxjs/memicons/background.jpg') }}"> --}}
-        <img id="warpbg" class="parallax left top" src="">
-        <a href="{{ route('getprods',2) }}"> <img id="star4" class="parallax left top"
-                src="{{ asset('assets/js/parallaxjs/memicons/123-03.png') }}"></a>
-        <a href="{{ route('getprods',3) }}"> <img id="star5" class="parallax left"
-                src="{{ asset('assets/js/parallaxjs/memicons/crane.png') }}"></a>
-        <a href="{{ route('getprods',4) }}"> <img id="planet" class="parallax left top"
-                src="{{ asset('assets/js/parallaxjs/memicons/undercarriage.png') }}"></a>
-        <a href="{{ route('getprods',5) }}"> <img id="robot" class="parallax top"
-                src="{{ asset('assets/js/parallaxjs/memicons/123-07.png') }}"></a>
-        <a href="{{ route('getprods',6) }}"> <img id="astronaut" class="parallax"
-                src="{{ asset('assets/js/parallaxjs/memicons/123-05.png') }}"></a>
-        <a href="{{ route('getprods',7) }}"> <img id="astronaut1" class="parallax"
-                src="{{ asset('assets/js/parallaxjs/memicons/123-04.png') }}"></a>
-        <a href="{{ route('getprods',8) }}"> <img id="astronaut2" class="parallax"
-                src="{{ asset('assets/js/parallaxjs/memicons/123-06.png') }}"></a>
+        <img id="warpbg" class="parallax left top" src="" alt="Manokamana Earthmovers Construction Equipment Background">
+        <a href="{{ route('getprods', 'product-1') }}"> <img id="star4" class="parallax left top"
+                src="{{ asset('assets/js/parallaxjs/memicons/123-03.png') }}" alt="Construction Equipment Product 1"></a>
+        <a href="{{ route('getprods', 'product-2') }}"> <img id="star5" class="parallax left"
+                src="{{ asset('assets/js/parallaxjs/memicons/crane.png') }}" alt="Heavy Duty Crane Equipment"></a>
+        <a href="{{ route('getprods', 'product-3') }}"> <img id="planet" class="parallax left top"
+                src="{{ asset('assets/js/parallaxjs/memicons/undercarriage.png') }}" alt="Undercarriage Parts and Components"></a>
+        <a href="{{ route('getprods', 'product-4') }}"> <img id="robot" class="parallax top"
+                src="{{ asset('assets/js/parallaxjs/memicons/123-07.png') }}" alt="Industrial Machinery and Equipment"></a>
+        <a href="{{ route('getprods', 'product-5') }}"> <img id="astronaut" class="parallax"
+                src="{{ asset('assets/js/parallaxjs/memicons/123-05.png') }}" alt="Construction Tools and Accessories"></a>
+        <a href="{{ route('getprods', 'product-6') }}"> <img id="astronaut1" class="parallax"
+                src="{{ asset('assets/js/parallaxjs/memicons/123-04.png') }}" alt="Heavy Equipment Parts"></a>
+        <a href="{{ route('getprods', 'product-7') }}"> <img id="astronaut2" class="parallax"
+                src="{{ asset('assets/js/parallaxjs/memicons/123-06.png') }}" alt="Construction Machinery Components"></a>
         <div class="parallax" id="star1">
             {{-- <div class="panel">
                     <div class="home-slider-left" id="titlesection"> --}}
@@ -42,7 +63,9 @@
             <div class="mem-slider-abt-txt" style="color:grey;">
                 {!! \Illuminate\Support\Str::limit($about->description, 160) !!}
             </div>
-            <a href="{{ route('about') }}" class="outline-btn" id="readmebutton">Read More</a>
+            <a href="{{ route('about') }}" class="outline-btn" id="readmebutton" title="Learn more about Manokamana Earthmovers">
+                Learn More About Manokamana Earthmovers
+            </a>
             {{-- </div>
                 </div> --}}
 
@@ -51,27 +74,27 @@
             <div class="owl-carousel owl-theme" id="partnerSliders">
                 <div class="partner-wrap">
                     <img class="partner-img" src="{{ asset('assets/js/parallaxjs/memicons/123-09.png') }}"
-                        style="width:180px!important; height:180px!important; ">
+                        style="width:180px!important; height:180px!important; " alt="Partner Brand Logo 1">
                 </div>
                 <div class="partner-wrap">
                     <img class="partner-img" src="{{ asset('assets/js/parallaxjs/memicons/123-10.png') }}"
-                        style="width:180px!important; height:180px!important; ">
+                        style="width:180px!important; height:180px!important; " alt="Partner Brand Logo 2">
                 </div>
                 <div class="partner-wrap">
                     <img class="partner-img" src="{{ asset('assets/js/parallaxjs/memicons/123-11.png') }}"
-                        style="width:180px!important; height:180px!important; ">
+                        style="width:180px!important; height:180px!important; " alt="Partner Brand Logo 3">
                 </div>
                 <div class="partner-wrap">
                     <img class="partner-img" src="{{ asset('assets/js/parallaxjs/memicons/123-12.png') }}"
-                        style="width:180px!important; height:180px!important; ">
+                        style="width:180px!important; height:180px!important; " alt="Partner Brand Logo 4">
                 </div>
                 <div class="partner-wrap">
                     <img class="partner-img" src="{{ asset('assets/js/parallaxjs/memicons/123-13.png') }}"
-                        style="width:180px!important; height:180px!important; ">
+                        style="width:180px!important; height:180px!important; " alt="Partner Brand Logo 5">
                 </div>
                 <div class="partner-wrap">
                     <img class="partner-img" src="{{ asset('assets/js/parallaxjs/memicons/123-14.png') }}"
-                        style="width:180px!important; height:180px!important; ">
+                        style="width:180px!important; height:180px!important; " alt="Partner Brand Logo 6">
                 </div>
             </div>
         </div>
@@ -82,8 +105,8 @@
                 <div class="quote-text">
                     Looking for Quality Materials, Lets Become Partner with Us:
                 </div>
-                <a href="https://mem.com.np/dealersignup" class="quote-btn">
-                    Apply Now
+                <a href="https://mem.com.np/dealersignup" class="quote-btn" title="Register as a Dealer with Manokamana Earthmovers">
+                    Become a Dealer Partner
                 </a>
             </div>
         </div>
@@ -106,7 +129,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 @foreach($products as $product)
                 <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 flex flex-col h-[450px]">
-                    <a href="{{url('product/details', $product->id)}}" class="block h-64 relative overflow-hidden group">
+                    <a href="{{ route('product.details', $product->slug) }}" class="block h-64 relative overflow-hidden group">
                         <div class="absolute inset-0 bg-black/5 group-hover:bg-black/10 transition-colors duration-300"></div>
                         <img
                             src="{{asset('uploads/product'.'/'.$product->image)}}"
@@ -153,7 +176,7 @@
                             @endif
 
                             <a
-                                href="{{url('product/details', $product->id)}}"
+                                href="{{ route('product.details', $product->slug) }}"
                                 class="w-full inline-flex items-center justify-center px-4 py-2.5 border border-transparent text-sm font-medium rounded-md text-white bg-[#eab22c] hover:bg-[#d4a429] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#eab22c] transition-colors duration-300">
                                 <i class="far fa-eye mr-2"></i>
                                 View Details
@@ -253,7 +276,7 @@
 
                             <!-- Action Button -->
                             <a
-                                href="{{url('product/details', $product->id)}}"
+                                href="{{ route('product.details', $product->slug) }}"
                                 class="block w-full text-center px-4 py-2.5 bg-[#eab22c] hover:bg-[#d4a429] text-white text-sm font-medium rounded-md transition-colors duration-300">
                                 View Details
                             </a>
@@ -347,7 +370,7 @@
 
                                 <!-- Action Button -->
                                 <a
-                                    href="{{url('product/details', $product->id)}}"
+                                    href="{{ route('product.details', $product->slug) }}"
                                     class="group/btn relative w-full inline-flex items-center justify-center px-4 py-3 bg-gray-900 text-white rounded-xl hover:bg-[#eab22c] transition-all duration-300">
                                     <span class="mr-2">View Details</span>
                                     <svg
@@ -516,7 +539,7 @@
                                     <img
                                         src="{{asset('uploads/testimonal'.'/'.$testimonal->image)}}"
                                         class="w-10 h-10 rounded-full object-cover border-2 border-[#eab22c]/20"
-                                        alt="{{$testimonal->title}}">
+                                        alt="{{$testimonal->title}} - {{$testimonal->position}} at Manokamana Earthmovers">
                                 </div>
                                 <div>
                                     <h4 class="text-sm font-semibold text-gray-900">
@@ -549,7 +572,7 @@
                 @foreach($partners as $partner)
                 <div class="item {{ $i == 0 ? 'active' : '' }}">
                     <div class="partner-wrap">
-                        <img class="partner-img" src="{{asset('uploads/partner'.'/'.$partner->image)}}">
+                        <img class="partner-img" src="{{asset('uploads/partner'.'/'.$partner->image)}}" alt="{{$partner->name ?? 'Partner Company Logo - Manokamana Earthmovers'}}">
                     </div>
                 </div>
                 @php $i++; @endphp
@@ -743,4 +766,50 @@
         @apply bg-[#eab22c] h-1;
     }
 </style>
+
+<!-- GetButton.io widget -->
+<script type="text/javascript">
+    (function() {
+        var options = {
+            whatsapp: "+97715184300", // WhatsApp number
+            viber: "+977 985-1275887", // Viber number
+            call_to_action: "Message us", // Call to action
+            button_color: "#FF6550", // Color of button
+            position: "right", // Position may be 'right' or 'left'
+            order: "whatsapp,viber", // Order of buttons
+            pre_filled_message: "How can we help you?", // WhatsApp pre-filled message
+            // Add proper href attributes for crawlability
+            links: {
+                whatsapp: "https://wa.me/97715184300",
+                viber: "viber://chat?number=+97798512758887"
+            }
+        };
+        var proto = document.location.protocol,
+            host = "getbutton.io",
+            url = proto + "//static." + host;
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = url + '/widget-send-button/js/init.js';
+        s.onload = function() {
+            WhWidgetSendButton.init(host, proto, options);
+        };
+        var x = document.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
+
+        // Add fallback links for crawlers and accessibility
+        var fallbackContainer = document.createElement('div');
+        fallbackContainer.style.display = 'none';
+        fallbackContainer.innerHTML = `
+            <a href="https://wa.me/97715184300" rel="nofollow" aria-label="Chat with us on WhatsApp">
+                Chat with us on WhatsApp
+            </a>
+            <a href="viber://chat?number=+97798512758887" rel="nofollow" aria-label="Chat with us on Viber">
+                Chat with us on Viber
+            </a>
+        `;
+        document.body.appendChild(fallbackContainer);
+    })();
+</script>
+<!-- /GetButton.io widget -->
 @endsection

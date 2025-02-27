@@ -10,12 +10,11 @@ use App\Model\Prods;
 
 class FrontProdsController extends Controller
 {
-   
-      
-    public function getProdsbyId($id)
-    {   
-        $prods = Prods::find($id); 
-        return view('frontend.prods.index',compact('prods')); 
-    }
 
+
+    public function getProdsbyId($slug)
+    {
+        $prods = Prods::where('slug', $slug)->firstOrFail();
+        return view('frontend.prods.index', compact('prods'));
+    }
 }
