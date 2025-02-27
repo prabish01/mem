@@ -28,7 +28,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}" />
 
     <title>Manokamana Earthmovers</title>
-    <script src="https://khalti.com/static/khalti-checkout.js"></script>
+    <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.22.0.0.0/khalti-checkout.iffe.js"></script>
 
 </head>
 
@@ -69,9 +69,9 @@
                                             </div>
                                             <div class="top-number">
                                                 @php
-                                                    $infoPhone = DB::table('infos')
-                                                        ->select('phone')
-                                                        ->first();
+                                                $infoPhone = DB::table('infos')
+                                                ->select('phone')
+                                                ->first();
                                                 @endphp
                                                 <a href="tel:{{ $infoPhone->phone }}">{{ $infoPhone->phone }}</a>
                                             </div>
@@ -79,62 +79,62 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2 my-auto">
-            
+
                                     <div class="top-right">
                                         @guest
-                                            <a href="{{ route('login') }}" class="top-user">
-                                                <span class="top-login-link">Login/ Signup</span><i class="fa fa-user"></i>
-                                            </a>
+                                        <a href="{{ route('login') }}" class="top-user">
+                                            <span class="top-login-link">Login/ Signup</span><i class="fa fa-user"></i>
+                                        </a>
                                         @else
-                                            <button class="btn call-left" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                <i class="fa fa-user" style="size: 30px;"></i>
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
-                                                style="background-color: white">
-                                                @php
-                                                    $currentuser = Auth::user();
-                                                    $loginUrl = 'dashboard';
-                                                    
-                                                @endphp
-            
-                                                @if ($currentuser->role_id == 1)
-                                                <a class="dropdown-item" href="{{ url('dashboard') }}">
+                                        <button class="btn call-left" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-user" style="size: 30px;"></i>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                                            style="background-color: white">
+                                            @php
+                                            $currentuser = Auth::user();
+                                            $loginUrl = 'dashboard';
+
+                                            @endphp
+
+                                            @if ($currentuser->role_id == 1)
+                                            <a class="dropdown-item" href="{{ url('dashboard') }}">
                                                 @elseif ($currentuser->role_id==2)
                                                 <a class="dropdown-item" href="{{ url('dealerdashboard') }}">
-                                                @elseif ($currentuser->role_id==3)
-                                                <a class="dropdown-item" href="{{ url('userdashboard') }}">
-                                                @endif
-                                                    <span class="top-login-link">Dashboard</span>
-                                                    <i class="fa fa-dashboard"></i>
-                                                </a>
-                                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                                    <span class="top-login-link">{{ __('Logout') }}</span>
-                                                </a>
-                                            </div>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                style="display: none;">
-                                                @csrf
-                                            </form>
+                                                    @elseif ($currentuser->role_id==3)
+                                                    <a class="dropdown-item" href="{{ url('userdashboard') }}">
+                                                        @endif
+                                                        <span class="top-login-link">Dashboard</span>
+                                                        <i class="fa fa-dashboard"></i>
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                        <span class="top-login-link">{{ __('Logout') }}</span>
+                                                    </a>
+                                        </div>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
                                         @endguest
                                         @guest
-                                            <a href="{{ route('login') }}" class="top-cart">
-                                                <i class="fa fa-shopping-cart"></i>
-                                                <span class="cart-count">0</span>
-                                            </a>
+                                        <a href="{{ route('login') }}" class="top-cart">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span class="cart-count">0</span>
+                                        </a>
                                         @else
-                                            <a href="{{ url('cart/list') }}" class="top-cart">
-                                                <i class="fa fa-shopping-cart"></i>
-                                                <span class="cart-count">{{ Cart::count() }}</span>
-                                            </a>
+                                        <a href="{{ url('cart/list') }}" class="top-cart">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span class="cart-count">{{ Cart::count() }}</span>
+                                        </a>
                                         @endguest
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-            
+
                     <div class="menu-bar" id="desktopMenuBar">
                         <nav class="navbar navbar-expand-lg">
                             <div class="container">
@@ -145,36 +145,36 @@
                                 </button>
                                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                                     <ul class="navbar-nav mx-auto">
-            
+
                                         @php
-                                            $cats = DB::table('categories')
-                                                ->select('id', 'category_name')
-                                                ->get();
+                                        $cats = DB::table('categories')
+                                        ->select('id', 'category_name')
+                                        ->get();
                                         @endphp
                                         @foreach ($cats as $cat)
-                                            <li class="nav-item dropdown">
-                                                @php
-                                                    $subcats = DB::table('sub_categories')
-                                                        ->select('id', 'category_id', 'subcategory_name')
-                                                        ->orderBy('id', 'desc')
-                                                        ->where('category_id', $cat->id)
-                                                        ->get();
-                                                @endphp
-                                                @php $i= 0; @endphp
-                                                @if ($subcats->count() > 0)
-                                                    <a class="nav-link"
-                                                        href="{{ URL::to('/product/category', $cat->id) }}">{{ $cat->category_name }}</a>
-                                                @else
-                                                    <a class="nav-link"
-                                                        href="{{ URL::to('/product/category', $cat->id) }}">{{ $cat->category_name }}</a>
-                                                @endif
-                                                <div class="dropdown-menu">
-                                                    @foreach ($subcats as $subcat)
-                                                        <a class="dropdown-item"
-                                                            href="{{ URL::to('/product/subcategory', $subcat->id) }}">{{ $subcat->subcategory_name }}</a>
-                                                    @endforeach
-                                                </div>
-                                            </li>
+                                        <li class="nav-item dropdown">
+                                            @php
+                                            $subcats = DB::table('sub_categories')
+                                            ->select('id', 'category_id', 'subcategory_name')
+                                            ->orderBy('id', 'desc')
+                                            ->where('category_id', $cat->id)
+                                            ->get();
+                                            @endphp
+                                            @php $i= 0; @endphp
+                                            @if ($subcats->count() > 0)
+                                            <a class="nav-link"
+                                                href="{{ URL::to('/product/category', $cat->id) }}">{{ $cat->category_name }}</a>
+                                            @else
+                                            <a class="nav-link"
+                                                href="{{ URL::to('/product/category', $cat->id) }}">{{ $cat->category_name }}</a>
+                                            @endif
+                                            <div class="dropdown-menu">
+                                                @foreach ($subcats as $subcat)
+                                                <a class="dropdown-item"
+                                                    href="{{ URL::to('/product/subcategory', $subcat->id) }}">{{ $subcat->subcategory_name }}</a>
+                                                @endforeach
+                                            </div>
+                                        </li>
                                         @endforeach
                                         <li class="nav-item dropdown">
                                             <a href="" class="nav-link">Company</a>
@@ -189,12 +189,12 @@
                             </div>
                         </nav>
                     </div>
-                   </div>
-    <div id="mobileMenu">
-	 
-	</div> 
+                </div>
+                <div id="mobileMenu">
+
+                </div>
             </header>
-           
+
             @include('flashMsg.flashmessages')
 
             <style>
@@ -217,7 +217,6 @@
                     min-height: 800px;
                     margin-top: 50px;
                 }
-
             </style>
             <div class="container" id="container1">
                 <div class="i-am-centered">
@@ -228,39 +227,45 @@
                                                                             transition: 0.3s;
                                                                             min-width: 40%;
                                                                             border-radius: 5px;">
-                                <img class="mySlides" src="{{ asset('uploads/prods' . '/' . $prods->prods_image) }}">
-
-                                {{-- <button class="w3-button w3-black w3-display-left"
-                                    onclick="plusDivs(-1)">&#10094;</button>
-                                <button class="w3-button w3-black w3-display-right"
-                                    onclick="plusDivs(1)">&#10095;</button> --}}
+                                <picture>
+                                    <source type="image/webp" srcset="{{ asset('uploads/prods/' . pathinfo($prods->prods_image, PATHINFO_FILENAME) . '.webp') }}"
+                                        sizes="(max-width: 768px) 100vw, 800px">
+                                    <img class="mySlides" src="{{ asset('uploads/prods/' . $prods->prods_image) }}"
+                                        loading="lazy"
+                                        alt="{{ $prods->prods_title }}"
+                                        style="width: 100%; height: auto; max-height: 500px; object-fit: contain;">
+                                </picture>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             @if ($prods->childlink->count() > 0)
-                                <div class="jMyCarousel"  >
-                                    <ul>
-                                        @foreach ($prods->childlink as $childlink)
-                                            <li><a
-                                                    href="{{ URL::to('/product/category', $childlink->category_id) }}"><img
-                                                        src="{{ asset('uploads/prodslink' . '/' . $childlink->filename) }}"
-                                                        width="150" height="150"></a>
-                                            </li>
-                                        @endforeach
-
-                                    </ul>
-                                </div>
+                            <div class="jMyCarousel">
+                                <ul>
+                                    @foreach ($prods->childlink as $childlink)
+                                    <li>
+                                        <picture>
+                                            <source type="image/webp" srcset="{{ asset('uploads/prodslink/' . pathinfo($childlink->filename, PATHINFO_FILENAME) . '.webp') }}">
+                                            <img src="{{ asset('uploads/prodslink/' . $childlink->filename) }}"
+                                                width="150" height="150"
+                                                loading="lazy"
+                                                alt="Product image {{ $loop->iteration }}"
+                                                style="object-fit: cover;">
+                                        </picture>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                             @endif
                         </div>
 
                     </div>
                     <div class="">
-
-                        <h1>{{ $prods->prods_title }}</h1>
+                        <h1 class="text-2xl font-bold text-gray-900 mb-4">{{ $prods->prods_title }}</h1>
                         <br>
-                        <h3>Description</h3>
-
-                        <p>{{ $prods->prods_description }}</p>
+                        <h2 class="text-xl font-semibold text-gray-900 mb-3">Description</h2>
+                        <div class="prose max-w-none">
+                            <p class="text-gray-700">{{ $prods->prods_description }}</p>
+                        </div>
                     </div>
                 </div>
             </div>

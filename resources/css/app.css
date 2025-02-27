@@ -1,3 +1,71 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .text-brand {
+        color: #b88d23;
+    }
+
+    .bg-brand {
+        background-color: #b88d23;
+    }
+
+    .bg-brand-light {
+        background-color: rgba(184, 141, 35, 0.1);
+    }
+
+    .hover\:bg-brand:hover {
+        background-color: #8b6a1b;
+    }
+
+    .hover\:text-brand:hover {
+        color: #b88d23;
+    }
+
+    .border-brand {
+        border-color: #b88d23;
+    }
+
+    .hover\:border-brand:hover {
+        border-color: #b88d23;
+    }
+
+    .focus\:ring-brand:focus {
+        --tw-ring-color: #b88d23;
+    }
+
+    .group-hover\:bg-brand {
+        background-color: #b88d23;
+    }
+
+    .group-hover\:text-brand {
+        color: #b88d23;
+    }
+}
+
+@layer components {
+    .messenger-container {
+        @apply fixed bottom-5 right-5 z-50;
+    }
+
+    .messenger-button {
+        @apply w-[60px] h-[60px] rounded-full border-none cursor-pointer flex items-center justify-center shadow-lg transition-transform duration-300;
+    }
+
+    .messenger-button:hover {
+        @apply transform scale-110;
+    }
+
+    .messenger-button:focus {
+        @apply outline-2 outline-white outline-offset-2;
+    }
+
+    .messenger-options {
+        @apply absolute bottom-[70px] right-0 bg-white rounded-xl p-2 shadow-lg;
+    }
+
+    .messenger-link {
+        @apply flex items-center px-4 py-2 rounded-lg transition-colors duration-200;
+    }
+}

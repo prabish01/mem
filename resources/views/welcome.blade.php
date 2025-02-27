@@ -102,10 +102,12 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
     <section id="quoteBlock">
         <div class="container">
             <div class="get-quote">
-                <div class="quote-text">
+                <div class="quote-text text-gray-800 font-medium">
                     Looking for Quality Materials, Lets Become Partner with Us:
                 </div>
-                <a href="https://mem.com.np/dealersignup" class="quote-btn" title="Register as a Dealer with Manokamana Earthmovers">
+                <a href="https://mem.com.np/dealersignup"
+                    class="quote-btn bg-brand hover:bg-brand text-white font-medium rounded-md px-6 py-3 inline-flex items-center transition-colors duration-300"
+                    title="Register as a Dealer with Manokamana Earthmovers">
                     Become a Dealer Partner
                 </a>
             </div>
@@ -221,9 +223,7 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                         <!-- Product Image Container -->
                         <div class="relative w-full sm:w-48 sm:h-full flex items-center justify-center">
                             <!-- Discount Badge -->
-                            <div class="absolute left-4 top-4 bg-red-500 text-white text-xs font-semibold px-2.5 py-1 rounded z-10">
-                                % OFF
-                            </div>
+
                             <!-- Limited Time Badge -->
                             <div class="absolute right-4 top-4 bg-white shadow-sm text-xs font-medium px-2.5 py-1 rounded flex items-center gap-1.5 z-10">
                                 <i class="fas fa-clock text-[#eab22c] text-xs"></i>
@@ -542,9 +542,9 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                                         alt="{{$testimonal->title}} - {{$testimonal->position}} at Manokamana Earthmovers">
                                 </div>
                                 <div>
-                                    <h4 class="text-sm font-semibold text-gray-900">
+                                    <h1 class="text-sm font-semibold text-gray-900">
                                         {{$testimonal->title}}
-                                    </h4>
+                                    </h1>
                                     <p class="text-xs text-gray-500">
                                         {{$testimonal->position}}
                                     </p>
@@ -585,6 +585,9 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
 
 </div>
 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
 <!-- Owl Carousel Initialization Script -->
 <script>
     $(document).ready(function() {
@@ -611,9 +614,30 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                     items: 4
                 }
             },
-            onInitialized: function() {
+            onInitialized: function(event) {
                 // Ensure carousel height accounts for scale effect
                 $('.owl-stage-outer').css('padding', '1rem 0');
+
+                // Add accessible names to dots
+                var slideCount = event.item.count;
+                $('.owl-dot').each(function(index) {
+                    $(this)
+                        .attr('aria-label', 'Go to slide ' + (index + 1) + ' of ' + slideCount)
+                        .attr('role', 'button');
+                    if ($(this).hasClass('active')) {
+                        $(this).attr('aria-current', 'true');
+                    }
+                });
+            },
+            onTranslated: function(event) {
+                // Update active state for screen readers
+                $('.owl-dot').each(function(index) {
+                    if ($(this).hasClass('active')) {
+                        $(this).attr('aria-current', 'true');
+                    } else {
+                        $(this).removeAttr('aria-current');
+                    }
+                });
             }
         });
 
@@ -673,50 +697,75 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
 </script>
 
 <style>
-    /* Tailwind-based navbar styles */
+    /* Navbar responsive styles */
     @media (max-width: 768px) {
         #navbarCollapse {
-            @apply hidden;
+            display: none;
         }
 
         #navbarCollapse.show {
-            @apply block bg-[#eab22c] absolute top-full left-0 right-0;
+            display: block;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #b88d23;
         }
 
         .navbar-toggler {
-            @apply block;
+            display: block;
         }
     }
 
     @media (min-width: 768px) {
         #navbarCollapse {
-            @apply !flex;
+            display: flex !important;
         }
 
         .navbar-toggler {
-            @apply hidden;
+            display: none;
         }
     }
 
     /* Navbar core styles */
     .navbar {
-        @apply relative flex flex-wrap items-center justify-between bg-[#eab22c];
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #b88d23;
     }
 
     .navbar-collapse {
-        @apply flex-grow items-center;
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
     }
 
     .navbar-nav {
-        @apply flex flex-col md:flex-row;
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media (min-width: 768px) {
+        .navbar-nav {
+            flex-direction: row;
+        }
     }
 
     .nav-item {
-        @apply relative;
+        position: relative;
     }
 
     .nav-link {
-        @apply block py-4 px-6 text-black uppercase text-sm font-medium transition-colors duration-200 relative;
+        display: block;
+        padding: 1rem 1.5rem;
+        color: black;
+        text-transform: uppercase;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: color 0.2s, background-color 0.2s;
         transform: skew(-15deg);
     }
 
@@ -726,44 +775,118 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
     }
 
     .nav-link:hover {
-        @apply bg-black text-white;
+        background-color: black;
+        color: white;
     }
 
     .nav-link::before {
         content: '';
-        @apply absolute inset-0 bg-black opacity-0 transition-opacity duration-200;
+        position: absolute;
+        inset: 0;
+        background-color: black;
+        opacity: 0;
+        transition: opacity 0.2s;
         transform: skew(15deg);
     }
 
     .nav-link:hover::before {
-        @apply opacity-100;
+        opacity: 1;
     }
 
     /* Dropdown styles */
     .dropdown-menu {
-        @apply absolute left-0 mt-0 w-56 bg-white border border-gray-200 rounded-b-md shadow-lg hidden group-hover:block z-50;
+        position: absolute;
+        left: 0;
+        margin-top: 0;
+        width: 14rem;
+        background-color: white;
+        border: 1px solid #e5e7eb;
+        border-bottom-radius: 0.375rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        display: none;
         transform: skew(0deg);
+        z-index: 50;
+    }
+
+    .group:hover .dropdown-menu {
+        display: block;
     }
 
     .dropdown-item {
-        @apply block px-4 py-2 text-sm text-gray-700 hover:bg-black hover:text-white transition-colors duration-200;
+        display: block;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        color: #374151;
         transform: skew(0deg);
+        transition: color 0.2s, background-color 0.2s;
+    }
+
+    .dropdown-item:hover {
+        background-color: black;
+        color: white;
     }
 
     /* Submenu positioning */
     .dropdown-submenu>.dropdown-menu {
-        @apply left-full top-0 rounded-r-md;
+        left: 100%;
+        top: 0;
+        border-top-right-radius: 0.375rem;
     }
 
     /* Mobile menu icon */
     .navbar-toggler-icon {
-        @apply w-6 h-6 relative;
+        width: 1.5rem;
+        height: 1.5rem;
+        position: relative;
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
 
-    /* Top yellow bar */
+    /* Top bar */
     .top-bar {
-        @apply bg-[#eab22c] h-1;
+        background-color: #b88d23;
+        height: 0.25rem;
+    }
+
+    /* Messenger button colors */
+    .messenger-button {
+        background-color: #E64A3C;
+        color: white;
+    }
+
+    .messenger-button:hover {
+        background-color: #d4392d;
+    }
+
+    .messenger-link.whatsapp {
+        color: #075E54;
+    }
+
+    .messenger-link.viber {
+        color: #59267C;
+    }
+
+    .owl-dot {
+        min-width: 44px;
+        /* Ensure touchable area is large enough */
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 5px;
+        padding: 10px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .owl-dot:focus {
+        outline: 2px solid #007bff;
+        outline-offset: 2px;
+    }
+
+    /* Hide default focus outline in Firefox */
+    .owl-dot::-moz-focus-inner {
+        border: 0;
     }
 </style>
 
@@ -784,15 +907,13 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                 viber: "viber://chat?number=+97798512758887"
             }
         };
-        var proto = document.location.protocol,
-            host = "getbutton.io",
-            url = proto + "//static." + host;
+        var url = "https://static.getbutton.io";
         var s = document.createElement('script');
         s.type = 'text/javascript';
         s.async = true;
         s.src = url + '/widget-send-button/js/init.js';
         s.onload = function() {
-            WhWidgetSendButton.init(host, proto, options);
+            WhWidgetSendButton.init('getbutton.io', 'https', options);
         };
         var x = document.getElementsByTagName('script')[0];
         x.parentNode.insertBefore(s, x);
@@ -800,6 +921,7 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
         // Add fallback links for crawlers and accessibility
         var fallbackContainer = document.createElement('div');
         fallbackContainer.style.display = 'none';
+        fallbackContainer.setAttribute('aria-hidden', 'true');
         fallbackContainer.innerHTML = `
             <a href="https://wa.me/97715184300" rel="nofollow" aria-label="Chat with us on WhatsApp">
                 Chat with us on WhatsApp
@@ -812,4 +934,64 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
     })();
 </script>
 <!-- /GetButton.io widget -->
+
+<div class="messenger-container" role="region" aria-label="Contact us via messenger">
+    <button type="button"
+        class="messenger-button bg-[#E64A3C] hover:bg-[#d4392d] text-white"
+        aria-expanded="false"
+        aria-controls="messenger-links-menu">
+        <span class="sr-only">Open messaging options</span>
+        <i class="fas fa-comment-dots text-2xl" aria-hidden="true"></i>
+    </button>
+    <div id="messenger-links-menu" class="messenger-options" hidden>
+        <ul role="menu" class="list-none p-0 m-0 flex flex-col gap-2">
+            <li role="none">
+                <a href="https://wa.me/97715184300"
+                    class="messenger-link text-[#075E54] hover:bg-gray-100"
+                    role="menuitem">
+                    <span class="sr-only">Chat with us on WhatsApp</span>
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li role="none">
+                <a href="viber://chat?number=+97798512758887"
+                    class="messenger-link text-[#59267C] hover:bg-gray-100"
+                    role="menuitem">
+                    <span class="sr-only">Chat with us on Viber</span>
+                    <i class="fab fa-viber" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const button = document.querySelector('.messenger-button');
+        const menu = document.querySelector('#messenger-links-menu');
+
+        button.addEventListener('click', function() {
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            menu.hidden = isExpanded;
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.messenger-container')) {
+                button.setAttribute('aria-expanded', 'false');
+                menu.hidden = true;
+            }
+        });
+
+        // Handle escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && !menu.hidden) {
+                button.setAttribute('aria-expanded', 'false');
+                menu.hidden = true;
+                button.focus();
+            }
+        });
+    });
+</script>
 @endsection

@@ -32,7 +32,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <title>Manokamana Earthmovers</title>
-    <script src="https://khalti.com/static/khalti-checkout.js"></script>
+    <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.22.0.0.0/khalti-checkout.iffe.js"></script>
 
 </head>
 
@@ -100,7 +100,7 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                                 <ul class="navbar-nav mx-auto">
-                                    
+
                                     @php
                                     $cats = DB::table('categories')->select('id','category_name')->get();
                                     @endphp
