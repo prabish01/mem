@@ -132,7 +132,7 @@
         </div>
 
         <!-- Messenger Button with SEO-friendly links -->
-        <div class="messenger-container" role="region" aria-label="Contact us via messenger">
+        <div class="messenger-container hidden" role="region" aria-label="Contact us via messenger">
             <div class="messenger-links" id="messenger-options">
                 <a href="https://wa.me/97715184300" class="messenger-link whatsapp" aria-label="Contact Manokamana Earthmovers on WhatsApp">
                     <i class="fab fa-whatsapp" aria-hidden="true"></i>
