@@ -66,12 +66,10 @@
             </div>
         </div>
     </div>
-    <div class="copyright">
-        <div class="container">
-            © {{date('Y')}} Manokamana Earthmovers. All Rights Reserved.
-            Powered by <a href="https://www.facebook.com/AnkkurGoyalOfficial" target="_blank">
-                <img class="ankur-img" src="{{asset('assets/img/ankurlogo.png')}}" alt="Powered by Ankkur Goyal" />
-            </a>
+    <div class="h-16 bg-black flex items-center px-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <p class="text-white text-sm">© {{date('Y')}} <span class="text-[#eab22c]">Manokamana Earthmovers</span>. All Rights Reserved.</p>
+            <p class="text-white text-sm">Powered By <span class="text-[#eab22c]">Infinity Infosys</span></p>
         </div>
     </div>
 </footer>

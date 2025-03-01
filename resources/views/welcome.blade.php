@@ -57,18 +57,18 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
         <a href="{{ route('getprods', 'product-7') }}"> <img id="astronaut2" class="parallax"
                 src="{{ asset('assets/js/parallaxjs/memicons/123-06.png') }}" alt="Construction Machinery Components"></a>
         <div class="parallax" id="star1">
-            {{-- <div class="panel">
-                    <div class="home-slider-left" id="titlesection"> --}}
-            <h2 class="mem-slider-abt-title" style="color:#eab22c; font-size: 60px; ">{{ $about->title }}</h2>
-            <div class="mem-slider-abt-txt" style="color:grey;">
-                {!! \Illuminate\Support\Str::limit($about->description, 160) !!}
+            <div class="text-center">
+                <h2 class="mem-slider-abt-title" style="color:#eab22c; font-size: 60px; ">{{ $about->title }}</h2>
+                <div class="mem-slider-abt-txt mb-6" style="color:grey;">
+                    {!! \Illuminate\Support\Str::limit($about->description, 160) !!}
+                </div>
+                <a href="{{ route('about') }}"
+                    class="inline-flex items-center px-8 py-3 border-2 border-[#eab22c] text-[#eab22c] font-medium rounded-md hover:bg-[#eab22c] hover:text-white transition-all duration-300"
+                    id="readmebutton"
+                    title="Learn more about Manokamana Earthmovers">
+                    <span>Learn More About Manokamana Earthmovers</span>
+                </a>
             </div>
-            <a href="{{ route('about') }}" class="outline-btn" id="readmebutton" title="Learn more about Manokamana Earthmovers">
-                Learn More About Manokamana Earthmovers
-            </a>
-            {{-- </div>
-                </div> --}}
-
         </div>
         <div class="parallax" id="star12">
             <div class="owl-carousel owl-theme" id="partnerSliders">
@@ -106,9 +106,10 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                     Looking for Quality Materials, Lets Become Partner with Us:
                 </div>
                 <a href="https://mem.com.np/dealersignup"
-                    class="quote-btn bg-brand hover:bg-brand text-white font-medium rounded-md px-6 py-3 inline-flex items-center transition-colors duration-300"
+                    class="quote-btn bg-brand hover:bg-brand text-black hover:text-[#eab22c] font-medium rounded-md px-6 py-3 inline-flex items-center transition-colors duration-300"
                     title="Register as a Dealer with Manokamana Earthmovers">
-                    Become a Dealer Partner
+                    <i class="fas fa-handshake mr-2"></i>
+                    Register as Dealer
                 </a>
             </div>
         </div>
@@ -130,15 +131,16 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 @foreach($products as $product)
-                <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 flex flex-col h-[450px]">
-                    <a href="{{ route('product.details', $product->slug) }}" class="block h-64 relative overflow-hidden group">
-                        <div class="absolute inset-0 bg-black/5 group-hover:bg-black/10 transition-colors duration-300"></div>
-                        <img
-                            src="{{asset('uploads/product'.'/'.$product->image)}}"
-                            class="w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-500"
-                            alt="{{$product->product_name}}">
-                        <div class="absolute top-4 right-4 bg-[#eab22c] text-white text-sm px-3 py-1 rounded-full">
-                            New
+                <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 flex flex-col">
+                    <a href="{{ route('product.details', $product->slug) }}" class="block relative overflow-hidden group">
+                        <div class="w-full h-48 bg-gray-50 flex items-center justify-center p-4">
+                            <img
+                                src="{{asset('uploads/product'.'/'.$product->image)}}"
+                                class="h-40 w-auto object-contain"
+                                alt="{{$product->product_name}}">
+                            <div class="absolute top-4 right-4 bg-[#eab22c] text-white text-sm px-3 py-1 rounded-full">
+                                New
+                            </div>
                         </div>
                     </a>
 
@@ -321,8 +323,8 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                     @foreach($featured as $product)
                     <div class="px-3 py-4">
                         <div class="bg-white rounded-2xl overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-500 group border border-gray-100">
-                            <!-- Product Image Container -->
-                            <div class="relative aspect-square bg-gray-50 p-8">
+                            <!-- Updated image container with fixed dimensions -->
+                            <div class="w-full h-[250px] relative bg-gray-50 p-8">
                                 <!-- Status Badge -->
                                 <div class="absolute left-4 top-4 z-10">
                                     <div class="flex gap-2">
@@ -332,14 +334,10 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                                             <span class="bg-blue-500 text-white text-xs font-medium px-2.5 py-1 rounded-full">Featured</span>
                                     </div>
                                 </div>
-
-                                <!-- Product Image -->
-                                <div class="w-full h-full flex items-center justify-center">
-                                    <img
-                                        src="{{asset('uploads/product'.'/'.$product->image)}}"
-                                        class="w-full h-full object-contain"
-                                        alt="{{$product->product_name}}">
-                                </div>
+                                <img
+                                    src="{{asset('uploads/product'.'/'.$product->image)}}"
+                                    class="w-full h-full object-contain"
+                                    alt="{{$product->product_name}}">
                             </div>
 
                             <!-- Product Info -->
@@ -935,30 +933,31 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
 </script>
 <!-- /GetButton.io widget -->
 
-<div class="messenger-container" role="region" aria-label="Contact us via messenger">
+<div class="fixed bottom-5 right-5 z-50">
     <button type="button"
-        class="messenger-button bg-[#E64A3C] hover:bg-[#d4392d] text-white"
+        class="w-14 h-14 flex items-center justify-center rounded-full bg-[#E64A3C] hover:bg-[#d4392d] text-white shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
         aria-expanded="false"
         aria-controls="messenger-links-menu">
         <span class="sr-only">Open messaging options</span>
         <i class="fas fa-comment-dots text-2xl" aria-hidden="true"></i>
     </button>
-    <div id="messenger-links-menu" class="messenger-options" hidden>
-        <ul role="menu" class="list-none p-0 m-0 flex flex-col gap-2">
-            <li role="none">
+
+    <div id="messenger-links-menu" class="absolute bottom-16 right-0 bg-white rounded-xl shadow-lg p-2 min-w-[200px] hidden" role="menu">
+        <ul class="flex flex-col gap-2">
+            <li>
                 <a href="https://wa.me/97715184300"
-                    class="messenger-link text-[#075E54] hover:bg-gray-100"
+                    class="flex items-center px-4 py-3 text-[#075E54] hover:bg-gray-100 rounded-lg transition-colors duration-200"
                     role="menuitem">
-                    <span class="sr-only">Chat with us on WhatsApp</span>
-                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                    <i class="fab fa-whatsapp text-2xl mr-3"></i>
+                    <span>WhatsApp</span>
                 </a>
             </li>
-            <li role="none">
+            <li>
                 <a href="viber://chat?number=+97798512758887"
-                    class="messenger-link text-[#59267C] hover:bg-gray-100"
+                    class="flex items-center px-4 py-3 text-[#59267C] hover:bg-gray-100 rounded-lg transition-colors duration-200"
                     role="menuitem">
-                    <span class="sr-only">Chat with us on Viber</span>
-                    <i class="fab fa-viber" aria-hidden="true"></i>
+                    <i class="fab fa-viber text-2xl mr-3"></i>
+                    <span>Viber</span>
                 </a>
             </li>
         </ul>
@@ -967,28 +966,28 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const button = document.querySelector('.messenger-button');
+        const button = document.querySelector('[aria-controls="messenger-links-menu"]');
         const menu = document.querySelector('#messenger-links-menu');
 
         button.addEventListener('click', function() {
             const isExpanded = this.getAttribute('aria-expanded') === 'true';
             this.setAttribute('aria-expanded', !isExpanded);
-            menu.hidden = isExpanded;
+            menu.classList.toggle('hidden');
         });
 
         // Close menu when clicking outside
         document.addEventListener('click', function(event) {
-            if (!event.target.closest('.messenger-container')) {
+            if (!event.target.closest('.fixed')) {
                 button.setAttribute('aria-expanded', 'false');
-                menu.hidden = true;
+                menu.classList.add('hidden');
             }
         });
 
         // Handle escape key
         document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' && !menu.hidden) {
+            if (event.key === 'Escape' && !menu.classList.contains('hidden')) {
                 button.setAttribute('aria-expanded', 'false');
-                menu.hidden = true;
+                menu.classList.add('hidden');
                 button.focus();
             }
         });

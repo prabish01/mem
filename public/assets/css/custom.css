@@ -165,14 +165,11 @@ a.quote-btn {
     display: inline-block;
     padding: .8rem 2rem;
     background: #fff;
-    color: #111;
     font-size: 1rem;
     font-weight: 500;
     text-transform: uppercase;
 }
-a.quote-btn:hover {
-    color: #eab22c;
-}
+
 #yearsMEM {
     display: flex;
 }
