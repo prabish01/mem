@@ -185,11 +185,11 @@
         <div class="md:hidden"> <!-- Mobile menu -->
             <div class="bg-white shadow-md">
                 <!-- Header with 3 items -->
-                <div class="flex items-center justify-between px-4 py-3">
+                <div class="flex items-center justify-between px-4 py-3 -mb-28">
                     <!-- Left: Menu Icon -->
                     <div class="flex items-center">
                         <button type="button" onclick="toggleMobileMenu()" class="p-2 hover:text-[#eab22c] transition-colors">
-                            <i class="fa fa-bars text-2xl"></i>
+                            <i class="fa text-[#eab22c] fa-bars text-2xl"></i>
                         </button>
                     </div>
 
@@ -205,15 +205,15 @@
                     <!-- Right: User Icon -->
                     <div class="flex items-center space-x-4">
                         @guest
-                        <a href="{{ route('login') }}" class="p-2 hover:text-[#eab22c] transition-colors">
+                        <a href="{{ route('login') }}" class="p-2 text-[#eab22c] hover:text-[#eab22c] transition-colors">
                             <i class="fa fa-user text-2xl"></i>
                         </a>
                         @else
                         <div class="relative">
                             <button type="button"
-                                class="p-2 hover:text-[#eab22c] transition-colors"
+                                class="p-2  hover:text-[#eab22c] transition-colors"
                                 onclick="this.nextElementSibling.classList.toggle('hidden')">
-                                <i class="fa fa-user text-2xl"></i>
+                                <i class="fa fa-user  text-2xl"></i>
                             </button>
                             <div class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
                                 @if (Auth::user()->role_id == 1)
@@ -238,7 +238,7 @@
                 </div>
 
                 <!-- Search bar -->
-                <div class="px-4 py-2">
+                <!-- <div class="px-4 py-2">
                     <form action="{{ url('search/product') }}" method="post" class="relative">
                         {{ csrf_field() }}
                         <input type="text"
@@ -249,7 +249,7 @@
                             <i class="fa fa-search text-gray-400"></i>
                         </button>
                     </form>
-                </div>
+                </div> -->
             </div>
 
             <!-- Bottom Navigation -->
@@ -509,3 +509,143 @@
         });
     });
 </script>
+
+<!-- Bottom Navigation -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-[#eab22c] shadow-up z-50">
+    <div class="flex justify-around items-center h-16">
+        <!-- Home -->
+        <a href="{{ route('landing') }}" class="flex flex-col items-center justify-center text-black hover:text-white transition-colors">
+            <i class="fa fa-home text-xl mb-1"></i>
+            <span class="text-xs font-semibold">Home</span>
+        </a>
+
+        <!-- Categories -->
+        <button onclick="toggleDrawer()" class="flex flex-col items-center justify-center text-black hover:text-white transition-colors">
+            <i class="fa fa-th-large text-xl mb-1"></i>
+            <span class="text-xs font-semibold">Categories</span>
+        </button>
+
+        <!-- Search -->
+        <button onclick="toggleSearch()" class="flex flex-col items-center justify-center text-black hover:text-white transition-colors">
+            <i class="fa fa-search text-xl mb-1"></i>
+            <span class="text-xs font-semibold">Search</span>
+        </button>
+
+        <!-- Cart -->
+        @guest
+        <div class="flex flex-col items-center justify-center relative">
+            <a href="{{ route('login') }}" class="flex flex-col items-center justify-center text-black hover:text-white transition-colors">
+                <div class="relative">
+                    <i class="fa fa-shopping-cart text-xl mb-1"></i>
+                    <span class="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">0</span>
+                </div>
+                <span class="text-xs font-semibold">Cart</span>
+            </a>
+        </div>
+        @else
+        <div class="flex flex-col items-center justify-center relative">
+            <a href="{{ url('cart/list') }}" class="flex flex-col items-center justify-center text-black hover:text-white transition-colors">
+                <div class="relative">
+                    <i class="fa fa-shopping-cart text-xl mb-1"></i>
+                    <span class="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                        {{ Cart::count() }}
+                    </span>
+                </div>
+                <span class="text-xs font-semibold">Cart</span>
+            </a>
+        </div>
+        @endguest
+    </div>
+</div>
+
+<!-- Search Overlay -->
+<div id="searchOverlay" class="md:hidden fixed inset-x-0 bottom-16 bg-white transform translate-y-full transition-transform duration-300 ease-in-out z-40">
+    <div class="p-4">
+        <form action="{{ url('search/product') }}" method="post" class="relative">
+            {{ csrf_field() }}
+            <input type="text"
+                name="search_text"
+                placeholder="Search products..."
+                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#eab22c] focus:border-transparent"
+                autocomplete="off">
+            <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#eab22c]">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function toggleSearch() {
+        const searchOverlay = document.getElementById('searchOverlay');
+        const isHidden = searchOverlay.classList.contains('translate-y-full');
+
+        if (isHidden) {
+            searchOverlay.classList.remove('translate-y-full');
+            setTimeout(() => {
+                searchOverlay.querySelector('input').focus();
+            }, 300);
+        } else {
+            searchOverlay.classList.add('translate-y-full');
+        }
+    }
+
+    // Close search when clicking outside
+    document.addEventListener('click', (e) => {
+        const searchOverlay = document.getElementById('searchOverlay');
+        const searchButton = document.querySelector('button[onclick="toggleSearch()"]');
+
+        if (!searchOverlay.contains(e.target) && !searchButton.contains(e.target)) {
+            searchOverlay.classList.add('translate-y-full');
+        }
+    });
+
+    // Close search when scrolling
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', () => {
+        const searchOverlay = document.getElementById('searchOverlay');
+        const st = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (st > lastScrollTop) {
+            searchOverlay.classList.add('translate-y-full');
+        }
+        lastScrollTop = st <= 0 ? 0 : st;
+    }, false);
+</script>
+
+<style>
+    /* Add smooth shadow for search overlay */
+    #searchOverlay {
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Prevent body scroll when search is open */
+    body.search-open {
+        overflow: hidden;
+    }
+</style>
+
+<style>
+    /* Add styles for active state in bottom nav */
+    .bottom-nav-item.active {
+        color: white;
+    }
+
+    /* Adjust bottom navigation spacing for 4 items */
+    .bottom-nav {
+        padding: 0 8px;
+    }
+
+    .bottom-nav>* {
+        flex: 1;
+        min-width: 0;
+        /* Prevents flex items from overflowing */
+    }
+
+    /* Ensure text doesn't wrap and ellipsis if needed */
+    .bottom-nav span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
