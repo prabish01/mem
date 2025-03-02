@@ -116,6 +116,20 @@
             border: 1px solid rgba(0, 0, 0, .15);
             border-radius: 0.25rem;
         }
+
+        .messenger-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        /* Add media query to hide messenger on mobile */
+        @media screen and (max-width: 768px) {
+            .messenger-container {
+                display: none;
+            }
+        }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -132,7 +146,7 @@
         </div>
 
         <!-- Messenger Button with SEO-friendly links -->
-        <div class="messenger-container hidden" role="region" aria-label="Contact us via messenger">
+        <div class="messenger-container" role="region" aria-label="Contact us via messenger">
             <div class="messenger-links" id="messenger-options">
                 <a href="https://wa.me/97715184300" class="messenger-link whatsapp" aria-label="Contact Manokamana Earthmovers on WhatsApp">
                     <i class="fab fa-whatsapp" aria-hidden="true"></i>
@@ -334,7 +348,7 @@
         }
     </style>
 
-   
+
 </body>
 
 </html>

@@ -92,9 +92,15 @@
         <div class="bg-[#eab22c] shadow-md" id="desktopMenuBar">
             <nav class="relative">
                 <div class="container mx-auto px-4">
-                    <button class="lg:hidden flex items-center px-3 py-2 text-black" type="button" data-toggle="navbar" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fa fa-bars text-xl"></i>
-                    </button>
+                    <!-- <div class="flex justify-between items-center px-4 w-full">
+                        <div class="menu-trigger-container flex items-center">
+                            <button class="menu-trigger" onclick="toggleMobileMenu()">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                        </div>
+                       
+                       
+                    </div> -->
                     <div class="hidden lg:flex lg:items-center" id="navbarCollapse">
                         <ul class="flex flex-col lg:flex-row lg:mx-auto lg:space-x-1">
                             @php
@@ -176,292 +182,316 @@
     </div>
 
     <div id="mobileMenu">
-        <div class="hs-menubar">
-            <div class="brand-logo flex justify-center">
-                <a href="{{ route('landing') }}"><img src="{{ asset('assets/img/logomem.png') }}" alt="Manokamana Earthmovers - Construction Equipment Supplier"> </a>
-            </div>
+        <div class="md:hidden"> <!-- Mobile menu -->
+            <div class="bg-white shadow-md">
+                <!-- Header with 3 items -->
+                <div class="flex items-center justify-between px-4 py-3">
+                    <!-- Left: Menu Icon -->
+                    <div class="flex items-center">
+                        <button type="button" onclick="toggleMobileMenu()" class="p-2 hover:text-[#eab22c] transition-colors">
+                            <i class="fa fa-bars text-2xl"></i>
+                        </button>
+                    </div>
 
-            <div class="menu-trigger" onclick="toggleMobileMenu()">
-                <i class="fa fa-bars"></i>
-            </div>
+                    <!-- Center: Logo -->
+                    <div class="flex justify-center">
+                        <a href="{{ route('landing') }}">
+                            <img src="{{ asset('assets/img/logomem.png') }}"
+                                alt="Manokamana Earthmovers"
+                                class="h-10 w-auto">
+                        </a>
+                    </div>
 
-            <form id="mobSearch" action="{{ url('search/product') }}" method="post">
-                <div class="mob-search-bar">
-                    {{ csrf_field() }}
-                    <input type="text" name="search_text" placeholder="Search...">
-                    <button type="submit" class="mob-search-btn">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Add new bottom navigation -->
-        <div class="mobile-bottom-nav">
-            <a href="{{ route('landing') }}" class="mobile-bottom-nav__item">
-                <div class="mobile-bottom-nav__item-content">
-                    <i class="fa fa-home"></i>
-                    <span>Home</span>
-                </div>
-            </a>
-
-            @guest
-            <a href="{{ route('login') }}" class="mobile-bottom-nav__item">
-                <div class="mobile-bottom-nav__item-content">
-                    <i class="fa fa-user"></i>
-                    <span>Login</span>
-                </div>
-            </a>
-            @else
-            <div class="mobile-bottom-nav__item">
-                <button class="mobile-bottom-nav__item-content w-full" type="button" id="dropdownMenuButtons" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-user"></i>
-                    <span>Account</span>
-                </button>
-            </div>
-            @endguest
-
-            @guest
-            <a href="{{ route('login') }}" class="mobile-bottom-nav__item">
-                <div class="mobile-bottom-nav__item-content">
-                    <i class="fa fa-shopping-cart"></i>
-                    <span class="cart-badge">0</span>
-                </div>
-            </a>
-            @else
-            <a href="{{ url('cart/list') }}" class="mobile-bottom-nav__item">
-                <div class="mobile-bottom-nav__item-content">
-                    <i class="fa fa-shopping-cart"></i>
-                    <span class="cart-badge">{{ Cart::count() }}</span>
-                </div>
-            </a>
-            @endguest
-        </div>
-
-        <nav class="hs-navigation">
-            <ul class="nav-links">
-                <li><a href="{{ url('frontend/about/us') }}">About Us</a></li>
-                <li><a href="{{ route('services') }}">My Care</a></li>
-                <li><a href="{{ route('career') }}">Career</a></li>
-                <li><a href="{{ url('frontend/contact/us') }}">Contact Us</a></li>
-
-                @foreach ($cats as $cat)
-                <li class="has-child">
-                    @php
-                    $subcats = DB::table('sub_categories')
-                    ->select('id', 'category_id', 'subcategory_name')
-                    ->orderBy('id', 'desc')
-                    ->where('category_id', $cat->id)
-                    ->get();
-                    @endphp
-                    @php $i= 0; @endphp
-                    @if ($subcats->count() > 0)
-                    <a class="block py-4 px-6 text-black uppercase text-sm font-medium relative hover:bg-black hover:text-white transition-all duration-200 transform skew-x-12" href="#">
-                        <span class="inline-block transform -skew-x-12">{{ $cat->category_name }}</span>
-                    </a>
-                    @else
-                    <a class="block py-4 px-6 text-black uppercase text-sm font-medium relative hover:bg-black hover:text-white transition-all duration-200 transform skew-x-12" href="#">
-                        <span class="inline-block transform -skew-x-12">{{ $cat->category_name }}</span>
-                    </a>
-                    @endif
-                    <ul class="hidden group-hover:block absolute left-0 mt-0 w-56 bg-black border border-gray-800 rounded-b-md shadow-lg z-50">
-                        @foreach ($subcats as $subcat)
-                        @php
-                        $childcats = DB::table('child_categories')
-                        ->select('id', 'childcategory_name')
-                        ->orderBy('id', 'desc')
-                        ->where('subcategory_id', $subcat->id)
-                        ->get();
-                        @endphp
-                        @if ($childcats->count() > 0)
-                        <li class="group/sub relative">
-                            <a class="block px-4 py-2 text-sm text-white hover:bg-gray-700 flex justify-between items-center" href="{{ URL::to('/product/subcategory', $subcat->id) }}">
-                                {{ $subcat->subcategory_name }}
-                                <i class="fas fa-chevron-right text-xs ml-2"></i>
-                            </a>
-                            <ul class="hidden group-hover/sub:block absolute left-full top-0 w-56 bg-black border border-gray-800 rounded-r-md shadow-lg">
-                                @foreach ($childcats as $childcat)
-                                <li>
-                                    <a class="block px-4 py-2 text-sm text-white hover:bg-gray-700" href="{{ URL::to('/product/childcategory', $childcat->id) }}">
-                                        {{ $childcat->childcategory_name }}
-                                    </a>
-                                </li>
-                                @endforeach
-                            </ul>
-                        </li>
+                    <!-- Right: User Icon -->
+                    <div class="flex items-center space-x-4">
+                        @guest
+                        <a href="{{ route('login') }}" class="p-2 hover:text-[#eab22c] transition-colors">
+                            <i class="fa fa-user text-2xl"></i>
+                        </a>
                         @else
-                        <li>
-                            <a class="block px-4 py-2 text-sm text-white hover:bg-gray-700" href="{{ URL::to('/product/subcategory', $subcat->id) }}">
-                                {{ $subcat->subcategory_name }}
-                            </a>
-                        </li>
-                        @endif
-                        @endforeach
-                    </ul>
-                </li>
-                @endforeach
-            </ul>
-        </nav>
+                        <div class="relative">
+                            <button type="button"
+                                class="p-2 hover:text-[#eab22c] transition-colors"
+                                onclick="this.nextElementSibling.classList.toggle('hidden')">
+                                <i class="fa fa-user text-2xl"></i>
+                            </button>
+                            <div class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                                @if (Auth::user()->role_id == 1)
+                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    href="{{ url('dashboard') }}">Dashboard</a>
+                                @elseif (Auth::user()->role_id == 2)
+                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    href="{{ url('dealerdashboard') }}">Dashboard</a>
+                                @elseif (Auth::user()->role_id == 3)
+                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    href="{{ url('userdashboard') }}">Dashboard</a>
+                                @endif
+                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                            </div>
+                        </div>
+                        @endguest
+                    </div>
+                </div>
+
+                <!-- Search bar -->
+                <div class="px-4 py-2">
+                    <form action="{{ url('search/product') }}" method="post" class="relative">
+                        {{ csrf_field() }}
+                        <input type="text"
+                            name="search_text"
+                            placeholder="Search..."
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#eab22c] focus:border-transparent">
+                        <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2">
+                            <i class="fa fa-search text-gray-400"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="fixed bottom-0 left-0 right-0 bg-[#eab22c] shadow-up z-50">
+                <div class="flex justify-around items-center h-16">
+                    <a href="{{ route('landing') }}" class="flex flex-col items-center justify-center text-black hover:text-white transition-colors">
+                        <i class="fa fa-home text-xl mb-1"></i>
+                        <span class="text-xs font-semibold">Home</span>
+                    </a>
+
+                    @guest
+                    <div class="flex flex-col items-center justify-center relative">
+                        <a href="{{ route('login') }}" class="flex flex-col items-center justify-center text-black hover:text-white transition-colors">
+                            <div class="relative">
+                                <i class="fa fa-shopping-cart text-xl mb-1"></i>
+                                <span class="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">0</span>
+                            </div>
+                            <span class="text-xs font-semibold">Cart</span>
+                        </a>
+                    </div>
+                    @else
+                    <div class="flex flex-col items-center justify-center relative">
+                        <a href="{{ url('cart/list') }}" class="flex flex-col items-center justify-center text-black hover:text-white transition-colors">
+                            <div class="relative">
+                                <i class="fa fa-shopping-cart text-xl mb-1"></i>
+                                <span class="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                                    {{ Cart::count() }}
+                                </span>
+                            </div>
+                            <span class="text-xs font-semibold">Cart</span>
+                        </a>
+                    </div>
+                    @endguest
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <nav class="hidden fixed inset-0 bg-white z-40 pt-16 overflow-y-auto">
+                <ul class="divide-y divide-gray-100">
+                    <li class="px-4 py-3 hover:bg-gray-50">
+                        <a href="{{ url('frontend/about/us') }}" class="block">About Us</a>
+                    </li>
+                    <li class="px-4 py-3 hover:bg-gray-50">
+                        <a href="{{ route('services') }}" class="block">My Care</a>
+                    </li>
+                    <li class="px-4 py-3 hover:bg-gray-50">
+                        <a href="{{ route('career') }}" class="block">Career</a>
+                    </li>
+                    <li class="px-4 py-3 hover:bg-gray-50">
+                        <a href="{{ url('frontend/contact/us') }}" class="block">Contact Us</a>
+                    </li>
+                    <!-- Categories -->
+                    @foreach ($cats as $cat)
+                    <li class="px-4 py-3 hover:bg-gray-50">
+                        <a href="#" class="flex justify-between items-center">
+                            {{ $cat->category_name }}
+                            @if($subcats->count() > 0)
+                            <i class="fas fa-chevron-right text-xs"></i>
+                            @endif
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+            </nav>
+        </div>
     </div>
 </header>
 <!-- End Offset Wrapper -->
 
-@media (max-width: 768px) {
-body {
-padding-top: 120px; /* Adjust based on your header + search bar height */
-padding-bottom: 60px;
-}
-}
+<!-- Drawer Navigation -->
+<div id="navDrawer" class="fixed inset-0 transform -translate-x-full transition-transform duration-300 ease-in-out z-50">
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-50" onclick="toggleDrawer()"></div>
+
+    <!-- Drawer Content -->
+    <div class="absolute top-0 left-0 w-4/5 h-full bg-[#eab22c] transform shadow-lg overflow-y-auto">
+        <!-- Drawer Header -->
+        <div class="flex items-center justify-between p-4 border-b border-black/10">
+            <h2 class="text-lg font-semibold text-black">Menu</h2>
+            <button onclick="toggleDrawer()" class="p-2 text-black hover:text-white transition-colors">
+                <i class="fa fa-times text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="divide-y divide-black/10">
+            @php
+            $cats = DB::table('categories')
+            ->select('id', 'category_name')
+            ->get();
+            @endphp
+
+            @foreach ($cats as $cat)
+            @php
+            $subcats = DB::table('sub_categories')
+            ->select('id', 'category_id', 'subcategory_name')
+            ->orderBy('id', 'desc')
+            ->where('category_id', $cat->id)
+            ->get();
+            @endphp
+
+            <div class="category-item">
+                <button onclick="toggleSubmenu('submenu-{{ $cat->id }}')"
+                    class="w-full flex items-center justify-between p-4 text-black hover:bg-black/10">
+                    <span class="font-medium">{{ $cat->category_name }}</span>
+                    @if($subcats->count() > 0)
+                    <i class="fas fa-chevron-right text-sm transition-transform duration-200"></i>
+                    @endif
+                </button>
+
+                @if($subcats->count() > 0)
+                <div id="submenu-{{ $cat->id }}" class="hidden bg-black/5">
+                    @foreach($subcats as $subcat)
+                    @php
+                    $childcats = DB::table('child_categories')
+                    ->select('id', 'childcategory_name')
+                    ->orderBy('id', 'desc')
+                    ->where('subcategory_id', $subcat->id)
+                    ->get();
+                    @endphp
+
+                    <div class="subcategory-item">
+                        <button onclick="toggleSubmenu('childmenu-{{ $subcat->id }}')"
+                            class="w-full flex items-center justify-between p-3 pl-8 text-black hover:bg-black/10">
+                            <span>{{ $subcat->subcategory_name }}</span>
+                            @if($childcats->count() > 0)
+                            <i class="fas fa-chevron-right text-sm transition-transform duration-200"></i>
+                            @endif
+                        </button>
+
+                        @if($childcats->count() > 0)
+                        <div id="childmenu-{{ $subcat->id }}" class="hidden bg-black/5">
+                            @foreach($childcats as $childcat)
+                            <a href="{{ URL::to('/product/childcategory', $childcat->id) }}"
+                                class="block p-3 pl-12 text-black hover:bg-black/10">
+                                {{ $childcat->childcategory_name }}
+                            </a>
+                            @endforeach
+                        </div>
+                        @endif
+                    </div>
+                    @endforeach
+                </div>
+                @endif
+            </div>
+            @endforeach
+
+            <!-- Company Links -->
+            <div class="category-item">
+                <button onclick="toggleSubmenu('company-menu')"
+                    class="w-full flex items-center justify-between p-4 text-black hover:bg-black/10">
+                    <span class="font-medium">Company</span>
+                    <i class="fas fa-chevron-right text-sm transition-transform duration-200"></i>
+                </button>
+                <div id="company-menu" class="hidden bg-black/5">
+                    <a href="{{ url('frontend/about/us') }}" class="block p-3 pl-8 text-black hover:bg-black/10">About Us</a>
+                    <a href="{{ route('services') }}" class="block p-3 pl-8 text-black hover:bg-black/10">My Care</a>
+                    <a href="{{ route('career') }}" class="block p-3 pl-8 text-black hover:bg-black/10">Career</a>
+                    <a href="{{ url('frontend/contact/us') }}" class="block p-3 pl-8 text-black hover:bg-black/10">Contact Us</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
 
 <script>
+    function toggleDrawer() {
+        const drawer = document.getElementById('navDrawer');
+        drawer.classList.toggle('-translate-x-full');
+        document.body.classList.toggle('overflow-hidden');
+    }
+
+    function toggleSubmenu(id) {
+        const submenu = document.getElementById(id);
+        const arrow = event.currentTarget.querySelector('.fa-chevron-right');
+
+        // Close all other submenus at the same level
+        const parent = submenu.parentElement.parentElement;
+        const siblings = parent.querySelectorAll(`[id^="${id.split('-')[0]}-"]`);
+        siblings.forEach(menu => {
+            if (menu !== submenu) {
+                menu.classList.add('hidden');
+                const siblingArrow = menu.parentElement.querySelector('.fa-chevron-right');
+                if (siblingArrow) siblingArrow.classList.remove('rotate-90');
+            }
+        });
+
+        // Toggle current submenu
+        submenu.classList.toggle('hidden');
+        if (arrow) arrow.classList.toggle('rotate-90');
+    }
+
+    // Close drawer when clicking overlay
+    document.addEventListener('click', (e) => {
+        const drawer = document.getElementById('navDrawer');
+        const isDrawerOpen = !drawer.classList.contains('-translate-x-full');
+
+        if (isDrawerOpen && !e.target.closest('.drawer-content') && !e.target.closest('button')) {
+            toggleDrawer();
+        }
+    });
+
+    // Update the existing toggleMobileMenu function
     function toggleMobileMenu() {
-        document.querySelector('.hs-navigation').classList.toggle('active');
+        toggleDrawer();
     }
 </script>
 
 <style>
-    .hs-navigation {
-        display: none;
-        position: fixed;
-        top: 60px;
-        left: 0;
-        right: 0;
-        background: white;
-        z-index: 49;
-        height: calc(100vh - 60px);
-        overflow-y: auto;
+    /* Smooth transitions for submenu arrows */
+    .fa-chevron-right {
+        transition: transform 0.2s ease-in-out;
     }
 
-    .hs-navigation.active {
-        display: block;
+    .rotate-90 {
+        transform: rotate(90deg);
     }
 
-    .nav-links {
-        padding: 1rem;
+    /* Smooth transitions for submenus */
+    [id^="submenu-"],
+    [id^="childmenu-"],
+    #company-menu {
+        transition: all 0.3s ease-in-out;
     }
 
-    .nav-links li {
-        padding: 0.5rem 0;
-        border-bottom: 1px solid #eee;
+    /* Optional: Add smooth scrolling to the drawer content */
+    #navDrawer .drawer-content {
+        scrollbar-width: thin;
+        scrollbar-color: #eab22c transparent;
     }
 
-    .nav-links li:last-child {
-        border-bottom: none;
+    #navDrawer .drawer-content::-webkit-scrollbar {
+        width: 6px;
     }
 
-    /* Updated Bottom Navigation Styles */
-    .mobile-bottom-nav {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 1000;
-        will-change: transform;
-        transform: translateZ(0);
-        display: flex;
-        height: 65px;
+    #navDrawer .drawer-content::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    #navDrawer .drawer-content::-webkit-scrollbar-thumb {
         background-color: #eab22c;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-        padding: 0 10px;
-    }
-
-    .mobile-bottom-nav__item {
-        flex: 1;
-        text-align: center;
-        font-size: 11px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        color: #000000;
-        transition: all 0.3s ease;
-    }
-
-    .mobile-bottom-nav__item:hover,
-    .mobile-bottom-nav__item.active {
-        color: #ffffff;
-    }
-
-    .mobile-bottom-nav__item-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-        padding: 8px 0;
-    }
-
-    .mobile-bottom-nav__item-content i {
-        font-size: 20px;
-        margin-bottom: 3px;
-        transition: all 0.3s ease;
-    }
-
-    .mobile-bottom-nav__item-content span {
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 0.3px;
-    }
-
-    /* Updated cart badge style */
-    .cart-badge {
-        position: absolute;
-        top: 6px;
-        right: 50%;
-        transform: translateX(8px);
-        background: #000000;
-        color: #ffffff;
-        border-radius: 12px;
-        padding: 2px 6px;
-        font-size: 10px;
-        font-weight: 600;
-        min-width: 18px;
-        height: 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Active state for bottom nav items */
-    .mobile-bottom-nav__item.active .mobile-bottom-nav__item-content {
-        color: #ffffff;
-    }
-
-    .mobile-bottom-nav__item.active .mobile-bottom-nav__item-content i {
-        transform: translateY(-2px);
-    }
-
-    /* Ripple effect for clicks */
-    .mobile-bottom-nav__item {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .mobile-bottom-nav__item::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: rgba(234, 178, 44, 0.1);
-        opacity: 0;
-        border-radius: 50%;
-        transform: scale(1);
-        transition: all 0.3s ease;
-    }
-
-    .mobile-bottom-nav__item:active::after {
-        transform: scale(0);
-        opacity: 1;
-        transition: 0s;
-    }
-
-    @media (min-width: 769px) {
-        .mobile-bottom-nav {
-            display: none;
-        }
+        border-radius: 3px;
     }
 </style>
 
