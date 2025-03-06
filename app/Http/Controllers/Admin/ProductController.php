@@ -71,6 +71,9 @@ class ProductController extends Controller
         $product->available_colors = $request->input('available_colors');
         $product->available_sizes = $request->input('available_sizes');
         $product->image = $name;
+        $product->meta_title = $request->input('meta_title');
+        $product->meta_description = $request->input('meta_description');
+        $product->meta_keywords = $request->input('meta_keywords');
 
         if($product->save()){
             return redirect('admin-product/view')->with('success','Product Added Successfully.');
@@ -142,6 +145,9 @@ class ProductController extends Controller
         $product->available_colors = $request->input('available_colors');
         $product->available_sizes = $request->input('available_sizes');
         $product->image = $name;
+        $product->meta_title = $request->input('meta_title');
+        $product->meta_description = $request->input('meta_description');
+        $product->meta_keywords = $request->input('meta_keywords');
 
         if($product->save()){
             return redirect('admin-product/view')->with('success','Product Added Successfully.');

@@ -7,120 +7,151 @@
             <h3>Add Product</h3>
         </div>
         <div class="box-body">
-          <form class="form-horizontal" method="post" action="{{url('admin-product/store')}}" enctype="multipart/form-data">
-                    {{csrf_field()}}
+            <form class="form-horizontal" method="post" action="{{url('admin-product/store')}}"
+                enctype="multipart/form-data">
+                {{csrf_field()}}
 
-              <div class="form-group">
-                  <label class="col-md-4 control-label">Select Category:</label>
-                  <div class="col-md-6">
-                      <select name="category_id" class="form-control" id="category">
-                          <option selected disabled>-- Select Category --</option>
-                          @foreach($categories as $category)
-                              <option value="{{$category->id}}">{{$category->category_name}}</option>
-                          @endforeach
-                      </select>
-                  </div>
-              </div>
+                <div class="bg-info" style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
 
-              <div class="form-group">
-                  <label class="col-md-4 control-label">Select Sub-Category:</label>
-                  <div class="col-md-6" id="subcategory">
-                      <select name="subcategory_id" id="freesubcategory" class="form-control">
+                    <h2 class="text-center "><strong>SEO</strong></h2>
 
-                      </select>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label class="col-md-4 control-label">Select Child-Category:</label>
-                  <div class="col-md-6" id="childcategory">
-                      <select name="childcategory_id" id="freechildcategory" class="form-control">
 
-                      </select>
-                  </div>
-              </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Meta Title</label>
+                        <div class="col-md-6">
+                            <input class="form-control" type="text" name="meta_title">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Meta Description</label>
+                        <div class="col-md-6">
+                            <input class="form-control" type="text" name="meta_description">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Meta Keywords</label>
+                        <div class="col-md-6">
+                            <input class="form-control" type="text" name="meta_keywords">
+                            <p class="help-block">Comma separated</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group" style="margin-top: 4rem">
+                    <label class="col-md-4 control-label">Select Category:</label>
+                    <div class="col-md-6">
+                        <select name="category_id" class="form-control" id="category">
+                            <option selected disabled>-- Select Category --</option>
+                            @foreach($categories as $category)
+                            <option value="{{$category->id}}">{{$category->category_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Select Sub-Category:</label>
+                    <div class="col-md-6" id="subcategory">
+                        <select name="subcategory_id" id="freesubcategory" class="form-control">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Select Child-Category:</label>
+                    <div class="col-md-6" id="childcategory">
+                        <select name="childcategory_id" id="freechildcategory" class="form-control">
+
+                        </select>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label class="col-md-4 control-label">Product Name:</label>
                     <div class="col-md-6">
-                       <input  class="form-control" type="text" name="product_name" required>
+                        <input class="form-control" type="text" name="product_name" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-4 control-label">Description:</label>
                     <div class="col-md-6">
-                       <textarea rows="8" class="form-control" type="text" id="description" name="description" required></textarea>
+                        <textarea rows="8" class="form-control" type="text" id="description" name="description"
+                            required></textarea>
                     </div>
                 </div>
 
-              <div class="form-group">
-                  <label class="col-md-4 control-label">Mark Price(MRP):</label>
-                  <div class="col-md-6">
-                      <input  class="form-control" type="number" name="mrp" required>
-                  </div>
-              </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Mark Price(MRP):</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="number" name="mrp" required>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label class="col-md-4 control-label">Price For Dealers:</label>
                     <div class="col-md-6">
-                       <input  class="form-control" type="number" name="dealer_price" required>
+                        <input class="form-control" type="number" name="dealer_price" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-4 control-label">Price For Consumers:</label>
                     <div class="col-md-6">
-                       <input  class="form-control" type="number" name="retailer_price" required>
+                        <input class="form-control" type="number" name="retailer_price" required>
                     </div>
                 </div>
 
-                  <div class="form-group">
-                      <label class="col-md-4 control-label">Discount Price(%):</label>
-                      <div class="col-md-6">
-                          <input  class="form-control" type="number" name="discount_price">
-                      </div>
-                  </div>
-
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">In Stock:</label>
-                        <div class="col-md-6">
-                           <input  class="form-control" type="number" name="in_stock" required>
-                        </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Discount Price(%):</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="number" name="discount_price">
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Available Colors:</label>
-                        <div class="col-md-6">
-                           <input  class="form-control" type="text" name="available_colors" required>
-                        </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">In Stock:</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="number" name="in_stock" required>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Available Sizes:</label>
-                        <div class="col-md-6">
-                           <input  class="form-control" type="text" name="available_sizes">
-                        </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Available Colors:</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" name="available_colors" required>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Product Image:</label>
-                        <div class="col-md-6">
-                           <input  class="form-control" type="file" name="image" required>
-                        </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Available Sizes:</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" name="available_sizes">
                     </div>
+                </div>
 
-                    <div class="col-md-offset-4">
-                        <button class="btn btn-primary">Save</button>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Product Image:</label>
+                    <div class="col-md-6">
+                        <input class="form-control" type="file" name="image" required>
                     </div>
-          </form>
-      </div>
-  </div>
+                </div>
+
+                <div class="col-md-offset-4">
+                    <button class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 @endsection
 @section('js')
 
-    <script>
-        $(document).ready(function() {
+<script>
+    $(document).ready(function() {
             $("#subcategory").find("*").prop("disabled", true);
             $('#freesubcategory').prepend('<option disabled="disabled" selected="selected">No Subcategory Found</option>');
             $('#category').on('change', function () {
@@ -164,5 +195,5 @@
                 });
             });
         });
-    </script>
+</script>
 @endsection

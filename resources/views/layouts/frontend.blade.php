@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>@yield('title', 'Manokamana Earthmovers - Leading Construction Equipment Supplier in Nepal')</title>
+    <title>Manokamana Earthmovers - @yield('title', 'Leading Construction Equipment Supplier in Nepal')</title>
     <meta name="description" content="@yield('meta_description', 'Manokamana Earthmovers is Nepal\'s premier supplier of construction equipment, earthmoving machinery, and industrial parts. We offer high-quality products with excellent after-sales service.')">
     <meta name="keywords" content="@yield('meta_keywords', 'construction equipment, earthmoving machinery, industrial parts, Nepal, Manokamana Earthmovers')">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="@yield('og_title', 'Manokamana Earthmovers - Construction Equipment Supplier')">
+    <meta property="og:title" content="Manokamana Earthmovers - @yield('og_title', 'Construction Equipment Supplier')">
     <meta property="og:description" content="@yield('og_description', 'Leading supplier of construction equipment and earthmoving machinery in Nepal')">
     <meta property="og:image" content="{{ asset('assets/img/logomem.png') }}">
     <meta property="og:url" content="{{ url()->current() }}">
