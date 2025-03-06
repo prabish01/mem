@@ -116,6 +116,20 @@
             border: 1px solid rgba(0, 0, 0, .15);
             border-radius: 0.25rem;
         }
+
+        .messenger-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        /* Add media query to hide messenger on mobile */
+        @media screen and (max-width: 768px) {
+            .messenger-container {
+                display: none;
+            }
+        }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -334,7 +348,7 @@
         }
     </style>
 
-   
+
 </body>
 
 </html>

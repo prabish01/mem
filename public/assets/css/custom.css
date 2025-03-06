@@ -966,7 +966,7 @@ span.wish-number {
     color: #fff;
 }
 .menu-trigger {
-    top: 15px;
+    /* top: 15px; */
     color: #eab22c;
 }
 ul.its-children {
