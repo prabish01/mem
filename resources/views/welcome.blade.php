@@ -57,18 +57,15 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
         <a href="{{ route('getprods', 'product-7') }}"> <img id="astronaut2" class="parallax"
                 src="{{ asset('assets/js/parallaxjs/memicons/123-06.png') }}" alt="Construction Machinery Components"></a>
         <div class="parallax" id="star1">
-            {{-- <div class="panel">
-                    <div class="home-slider-left" id="titlesection"> --}}
-            <h2 class="mem-slider-abt-title" style="color:#eab22c; font-size: 60px; ">{{ $about->title }}</h2>
-            <div class="mem-slider-abt-txt" style="color:grey;">
-                {!! \Illuminate\Support\Str::limit($about->description, 160) !!}
+            <div class="flex flex-col items-center justify-center text-center">
+                <h2 class="mem-slider-abt-title" style="color:#eab22c; font-size: 60px;">{{ $about->title }}</h2>
+                <div class="mem-slider-abt-txt max-w-2xl mx-auto" style="color:grey;">
+                    {!! \Illuminate\Support\Str::limit($about->description, 160) !!}
+                </div>
+                <a href="{{ route('about') }}" class="outline-btn mt-4" id="readmebutton" title="Learn more about Manokamana Earthmovers">
+                    Learn More About Manokamana Earthmovers
+                </a>
             </div>
-            <a href="{{ route('about') }}" class="outline-btn" id="readmebutton" title="Learn more about Manokamana Earthmovers">
-                Learn More About Manokamana Earthmovers
-            </a>
-            {{-- </div>
-                </div> --}}
-
         </div>
         <div class="parallax" id="star12">
             <div class="owl-carousel owl-theme" id="partnerSliders">
