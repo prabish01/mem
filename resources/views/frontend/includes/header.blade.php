@@ -49,7 +49,7 @@
                                 aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-user" style="size: 30px;"></i>
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-menu text-white" aria-labelledby="dropdownMenuButton">
                                 @php
                                 $currentuser = Auth::user();
                                 @endphp
@@ -59,14 +59,14 @@
                                     @elseif ($currentuser->role_id==2)
                                     <a class="dropdown-item" href="{{ url('dealerdashboard') }}">
                                         @elseif ($currentuser->role_id==3)
-                                        <a class="dropdown-item" href="{{ url('userdashboard') }}">
+                                        <a class="dropdown-item " href="{{ url('userdashboard') }}">
                                             @endif
-                                            <span class="top-login-link">Dashboard</span>
+                                            <span class="top-login-link text-white hover:text-yellow">Dashboard</span>
                                             <i class="fa fa-dashboard"></i>
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        <a class="dropdown-item text-white" href="{{ route('logout') }}"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <span class="top-login-link">{{ __('Logout') }}</span>
+                                            <span class="top-login-link text-white">{{ __('Logout') }}</span>
                                         </a>
                             </div>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
