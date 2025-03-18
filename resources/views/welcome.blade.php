@@ -123,7 +123,7 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
                 @foreach($products as $product)
                 <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 flex flex-col h-[450px]">
                     <a href="{{ route('product.details', $product->slug) }}" class="block h-64 relative overflow-hidden group">
@@ -210,87 +210,88 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                 <div class="w-20 h-1 bg-[#eab22c] mx-auto mb-4"></div>
             </div>
 
-            <!-- Products Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                @foreach($specials as $product)
-                <div class="bg-white rounded-lg shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
-                    <div class="flex flex-col sm:flex-row h-full">
-                        <!-- Product Image Container -->
-                        <div class="relative w-full sm:w-48 sm:h-full flex items-center justify-center">
-                            <!-- Discount Badge -->
-                            <div class="absolute left-4 top-4 bg-red-500 text-white text-xs font-semibold px-2.5 py-1 rounded z-10">
-                                % OFF
-                            </div>
-                            <!-- Limited Time Badge -->
-                            <div class="absolute right-4 top-4 bg-white shadow-sm text-xs font-medium px-2.5 py-1 rounded flex items-center gap-1.5 z-10">
-                                <i class="fas fa-clock text-[#eab22c] text-xs"></i>
-                                <span>Limited Time</span>
-                            </div>
-                            <!-- Product Image -->
-                            <div class="w-full h-full min-h-[200px] bg-gray-50 rounded-t-lg sm:rounded-l-lg sm:rounded-tr-none p-6 flex items-center justify-center">
-                                <img
-                                    src="{{asset('uploads/product'.'/'.$product->image)}}"
-                                    class="max-w-[160px] max-h-[160px] object-contain"
-                                    alt="{{$product->product_name}}">
-                            </div>
-                        </div>
-
-                        <!-- Product Details -->
-                        <div class="flex-1 p-5 flex flex-col justify-center">
-                            <!-- Title -->
-                            <h3 class="font-medium text-gray-900 mb-3 line-clamp-2">
-                                {{$product->product_name}}
-                            </h3>
-
-                            <!-- Features -->
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="inline-flex items-center text-xs text-[#eab22c] gap-1">
-                                    <i class="fas fa-award"></i>
-                                    Premium Quality
-                                </span>
-                                <span class="inline-flex items-center text-xs text-green-600 gap-1">
-                                    <i class="fas fa-truck"></i>
-                                    Fast Delivery
-                                </span>
-                            </div>
-
-                            <!-- Price Section -->
-                            @guest
-                            <div class="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                                <i class="fas fa-lock text-[#eab22c]"></i>
-                                Login to view prices
-                            </div>
-                            @else
-                            <div class="space-y-1 mb-4">
-                                <div class="text-gray-400 line-through text-sm">
-                                    MRP. {{$product->mrp}}
+            <!-- Carousel Container -->
+            <div class="relative overflow-hidden px-8">
+                <!-- Carousel Track -->
+                <div class="flex transition-transform duration-500 ease-in-out" id="specialOffersTrack">
+                    @foreach($specials as $product)
+                    <div class="flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 px-2">
+                        <div class="bg-white rounded-lg shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 h-[400px] overflow-hidden">
+                            <!-- Product Image Container -->
+                            <div class="relative w-full h-40">
+                                <!-- Badges -->
+                                <div class="absolute left-4 top-4 bg-red-500 text-white text-xs font-semibold px-2.5 py-1 rounded z-10">
+                                    % OFF
                                 </div>
-                                <div class="text-xl font-bold text-[#eab22c]">
-                                    RS. {{$product->UserRole_price()}}
+                                <div class="absolute right-4 top-4 bg-white shadow-sm text-xs font-medium px-2.5 py-1 rounded flex items-center gap-1.5 z-10">
+                                    <i class="fas fa-clock text-[#eab22c] text-xs"></i>
+                                    <span>Limited Time</span>
+                                </div>
+                                <!-- Product Image -->
+                                <div class="w-full h-full bg-gray-50 rounded-t-lg p-3 flex items-center justify-center">
+                                    <img src="{{asset('uploads/product'.'/'.$product->image)}}"
+                                        class="max-h-32 object-contain"
+                                        alt="{{$product->product_name}}">
                                 </div>
                             </div>
-                            @endif
 
-                            <!-- Action Button -->
-                            <a
-                                href="{{ route('product.details', $product->slug) }}"
-                                class="block w-full text-center px-4 py-2.5 bg-[#eab22c] hover:bg-[#d4a429] text-white text-sm font-medium rounded-md transition-colors duration-300">
-                                View Details
-                            </a>
+                            <!-- Product Details -->
+                            <div class="p-4 flex flex-col h-[calc(400px-160px)]">
+                                <h3 class="font-medium text-gray-900 mb-2 text-lg line-clamp-2">
+                                    {{$product->product_name}}
+                                </h3>
+
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span class="inline-flex items-center text-xs text-[#eab22c] gap-1">
+                                        <i class="fas fa-award"></i>
+                                        Premium Quality
+                                    </span>
+                                    <span class="inline-flex items-center text-xs text-green-600 gap-1">
+                                        <i class="fas fa-truck"></i>
+                                        Fast Delivery
+                                    </span>
+                                </div>
+
+
+                                @guest
+                                <div class="flex items-center gap-2 text-sm text-gray-500 mb-3">
+                                    <i class="fas fa-lock text-[#eab22c]"></i>
+                                    Login to view prices
+                                </div>
+                                @else
+                                <div class="space-y-1 mb-3">
+                                    <div class="text-gray-400 line-through text-sm">
+                                        MRP. {{$product->mrp}}
+                                    </div>
+                                    <div class="text-xl font-bold text-[#eab22c]">
+                                        RS. {{$product->UserRole_price()}}
+                                    </div>
+                                </div>
+                                @endif
+
+                                <div class="mt-auto">
+                                    <a href="{{ route('product.details', $product->slug) }}"
+                                        class="block w-full text-center px-4 py-2 bg-[#eab22c] hover:bg-[#d4a429] text-white text-sm font-medium rounded-md transition-colors duration-300">
+                                        View Details
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
-            </div>
 
-            <!-- View All Link -->
-            <div class="text-center mt-12">
-                <a
-                    href="{{route('allproducts')}}"
-                    class="inline-flex items-center gap-2 px-6 py-2.5 border-2 border-[#eab22c] text-[#eab22c] font-medium rounded-md hover:bg-[#eab22c] hover:text-white transition-colors duration-300">
-                    View All Products
-                    <i class="fas fa-arrow-right"></i>
-                </a>
+                <!-- Navigation Buttons -->
+                <button class="absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg z-10 transition-all duration-300 focus:outline-none mx-2" id="prevBtn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button class="absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg z-10 transition-all duration-300 focus:outline-none mx-2" id="nextBtn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
             </div>
         </div>
     </section>
@@ -539,9 +540,9 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                                         alt="{{$testimonal->title}} - {{$testimonal->position}} at Manokamana Earthmovers">
                                 </div>
                                 <div>
-                                    <h4 class="text-sm font-semibold text-gray-900">
+                                    <h1 class="text-sm font-semibold text-gray-900">
                                         {{$testimonal->title}}
-                                    </h4>
+                                    </h1>
                                     <p class="text-xs text-gray-500">
                                         {{$testimonal->position}}
                                     </p>
@@ -669,6 +670,90 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
     });
 </script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const track = document.getElementById('specialOffersTrack');
+        const slides = track.children;
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dotsContainer = document.getElementById('dotsContainer');
+
+        let currentPage = 0;
+        const slidesToShow = window.innerWidth >= 1280 ? 5 :
+            window.innerWidth >= 1024 ? 4 :
+            window.innerWidth >= 768 ? 3 :
+            window.innerWidth >= 640 ? 2 : 1;
+
+        const totalSlides = slides.length;
+        const totalPages = Math.ceil(totalSlides / slidesToShow);
+
+        // Don't show navigation if not enough slides
+        if (totalSlides <= slidesToShow) {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            dotsContainer.style.display = 'none';
+            return;
+        }
+
+        // Create dots
+        for (let i = 0; i < totalPages; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'w-3 h-3 rounded-full bg-gray-300 hover:bg-[#eab22c] transition-colors duration-300';
+            dot.addEventListener('click', () => goToPage(i));
+            dotsContainer.appendChild(dot);
+        }
+
+        function updateDots() {
+            const dots = dotsContainer.children;
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].className = i === currentPage ?
+                    'w-3 h-3 rounded-full bg-[#eab22c] transition-colors duration-300' :
+                    'w-3 h-3 rounded-full bg-gray-300 hover:bg-[#eab22c] transition-colors duration-300';
+            }
+        }
+
+        function goToPage(pageIndex) {
+            if (pageIndex >= totalPages) {
+                pageIndex = 0;
+            } else if (pageIndex < 0) {
+                pageIndex = totalPages - 1;
+            }
+
+            currentPage = pageIndex;
+            const offset = -(100 * currentPage);
+            track.style.transform = `translateX(${offset}%)`;
+            updateDots();
+        }
+
+        prevBtn.addEventListener('click', () => {
+            goToPage(currentPage - 1);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            goToPage(currentPage + 1);
+        });
+
+        // Auto slide
+        let autoSlideInterval = setInterval(() => {
+            goToPage(currentPage + 1);
+        }, 5000);
+
+        // Pause auto slide on hover
+        track.parentElement.addEventListener('mouseenter', () => {
+            clearInterval(autoSlideInterval);
+        });
+
+        track.parentElement.addEventListener('mouseleave', () => {
+            autoSlideInterval = setInterval(() => {
+                goToPage(currentPage + 1);
+            }, 5000);
+        });
+
+        // Initial setup
+        updateDots();
+    });
+</script>
+
 <style>
     /* Tailwind-based navbar styles */
     @media (max-width: 768px) {
@@ -761,6 +846,46 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
     /* Top yellow bar */
     .top-bar {
         @apply bg-[#eab22c] h-1;
+    }
+
+    /* Add to your style section */
+    #specialOffersTrack {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 100%;
+    }
+
+    #specialOffersTrack>div {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+
+    @media (max-width: 1279px) {
+        #specialOffersTrack>div {
+            flex: 0 0 25%;
+            max-width: 25%;
+        }
+    }
+
+    @media (max-width: 1023px) {
+        #specialOffersTrack>div {
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+        }
+    }
+
+    @media (max-width: 767px) {
+        #specialOffersTrack>div {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+    }
+
+    @media (max-width: 639px) {
+        #specialOffersTrack>div {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
     }
 </style>
 
