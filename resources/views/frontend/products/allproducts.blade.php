@@ -18,7 +18,7 @@
                             {{$product->product_name}}
                         </h3>
 
-                        <div class="space-y-1 mb-4">
+                        <!-- <div class="space-y-1 mb-4">
                             <div class="flex items-center text-sm text-gray-500">
                                 <i class="fas fa-check-circle text-[#eab22c] mr-2"></i>
                                 <span>Premium Quality</span>
@@ -27,7 +27,7 @@
                                 <i class="fas fa-truck text-[#eab22c] mr-2"></i>
                                 <span>Fast Delivery</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="mt-auto">

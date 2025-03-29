@@ -17,7 +17,7 @@
                                     <input type="text" name="search_text" placeholder="Search Product" aria-label="Search for products"
                                         class="w-full px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:border-[#eab22c]">
                                     <button type="submit" aria-label="Submit search"
-                                        class="absolute right-0 top-0 h-full px-4 bg-[#eab22c] text-white rounded-r-md hover:bg-[#d9a01b]">
+                                        class="absolute right-0 top-0 h-full px-4 text-black rounded-r-md hover:bg-">
                                         <i class="fa fa-search" aria-hidden="true"></i>
                                         <span class="sr-only">Search</span>
                                     </button>

@@ -132,9 +132,9 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                             src="{{asset('uploads/product'.'/'.$product->image)}}"
                             class="w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-500"
                             alt="{{$product->product_name}}">
-                        <div class="absolute top-4 right-4 bg-[#eab22c] text-white text-sm px-3 py-1 rounded-full">
+                        <!-- <div class="absolute top-4 right-4 bg-[#eab22c] text-white text-sm px-3 py-1 rounded-full">
                             New
-                        </div>
+                        </div> -->
                     </a>
 
                     <div class="p-6 flex flex-col flex-grow border-t border-gray-100">
@@ -143,7 +143,7 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                                 {{$product->product_name}}
                             </h3>
 
-                            <div class="space-y-1 mb-4">
+                            <!-- <div class="space-y-1 mb-4">
                                 <div class="flex items-center text-sm text-gray-500">
                                     <i class="fas fa-check-circle text-[#eab22c] mr-2"></i>
                                     <span>Premium Quality</span>
@@ -152,7 +152,7 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                                     <i class="fas fa-truck text-[#eab22c] mr-2"></i>
                                     <span>Fast Delivery</span>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="mt-auto">
@@ -220,13 +220,13 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                             <!-- Product Image Container -->
                             <div class="relative w-full h-40">
                                 <!-- Badges -->
-                                <div class="absolute left-4 top-4 bg-red-500 text-white text-xs font-semibold px-2.5 py-1 rounded z-10">
+                                <!-- <div class="absolute left-4 top-4 bg-red-500 text-white text-xs font-semibold px-2.5 py-1 rounded z-10">
                                     % OFF
-                                </div>
-                                <div class="absolute right-4 top-4 bg-white shadow-sm text-xs font-medium px-2.5 py-1 rounded flex items-center gap-1.5 z-10">
+                                </div> -->
+                                <!-- <div class="absolute right-4 top-4 bg-white shadow-sm text-xs font-medium px-2.5 py-1 rounded flex items-center gap-1.5 z-10">
                                     <i class="fas fa-clock text-[#eab22c] text-xs"></i>
                                     <span>Limited Time</span>
-                                </div>
+                                </div> -->
                                 <!-- Product Image -->
                                 <div class="w-full h-full bg-gray-50 rounded-t-lg p-3 flex items-center justify-center">
                                     <img src="{{asset('uploads/product'.'/'.$product->image)}}"
@@ -241,7 +241,7 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                                     {{$product->product_name}}
                                 </h3>
 
-                                <div class="flex flex-wrap gap-2 mb-3">
+                                <!-- <div class="flex flex-wrap gap-2 mb-3">
                                     <span class="inline-flex items-center text-xs text-[#eab22c] gap-1">
                                         <i class="fas fa-award"></i>
                                         Premium Quality
@@ -250,7 +250,7 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                                         <i class="fas fa-truck"></i>
                                         Fast Delivery
                                     </span>
-                                </div>
+                                </div> -->
 
 
                                 @guest
@@ -327,7 +327,7 @@ Leading supplier of premium construction equipment, parts, and machinery in Nepa
                                         @if($product->created_at->diffInDays(now()) < 30)
                                             <span class="bg-green-500 text-white text-xs font-medium px-2.5 py-1 rounded-full">New Arrival</span>
                                             @endif
-                                            <span class="bg-blue-500 text-white text-xs font-medium px-2.5 py-1 rounded-full">Featured</span>
+                                            <!-- <span class="bg-blue-500 text-white text-xs font-medium px-2.5 py-1 rounded-full">Featured</span> -->
                                     </div>
                                 </div>
 
