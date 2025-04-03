@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Http\Response;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,40 @@ use Illuminate\Support\Facades\Artisan;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/sitemap.xml', function () {
+    $urls = [
+        url('/'),
+        url('/blogs'),
+        url('/allproducts/products'),
+        url('/allcatalogues'),
+        url('/career'),
+        url('/about/us'),
+        url('/contact/us'),
+        url('/faq'),
+        url('/privacy/policy'),
+        url('/terms/conditions'),
+        url('/delivery/info'),
+    ];
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+    foreach ($urls as $url) {
+        $xml .= '<url>';
+        $xml .= '<loc>' . $url . '</loc>';
+        $xml .= '<lastmod>' . now()->toDateString() . '</lastmod>';
+        $xml .= '<changefreq>weekly</changefreq>';
+        $xml .= '<priority>0.8</priority>';
+        $xml .= '</url>';
+    }
+
+    $xml .= '</urlset>';
+
+    return response($xml)->header('Content-Type', 'application/xml');
+});
+
+
 
 Route::get('/', 'HomeController@index')->name('landing');
 
